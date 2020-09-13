@@ -1,1 +1,1 @@
-web: gunicorn cs3240-2jv.wsgi
+web: gunicorn mysite.wsgi
