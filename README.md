@@ -4,6 +4,7 @@
 
 
     #When pulling from github clear the database with
+    git pull
     chmod +x ./updatedb.sh
     ./updatedb.sh
 
