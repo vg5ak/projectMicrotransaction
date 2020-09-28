@@ -1,3 +1,17 @@
+"""
+
+/***************************************************************************************
+*  REFERENCES
+*  Title: In 5 mins: Set up Google login to sign up users on Django
+*  Author: Zoe Chew
+*  Date: 7/27/19
+*  Code version: n/a
+*  URL: https://medium.com/@whizzoe/in-5-mins-set-up-google-login-to-sign-up-users-on-django-e71d5c38f5d5
+*  Software License: Not released under license, part of tutorial
+*
+***************************************************************************************/
+"""
+
 """mysite URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -13,9 +27,13 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.views.generic import TemplateView # <--
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+ path('', TemplateView.as_view(template_name="microdollars/index.html")), # <--
+ path('admin/', admin.site.urls),
+ path('accounts/', include('allauth.urls')),
 ]

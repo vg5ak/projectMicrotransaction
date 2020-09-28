@@ -1,0 +1,31 @@
+{% comment %} 
+/***************************************************************************************
+*  REFERENCES
+*  Title: In 5 mins: Set up Google login to sign up users on Django
+*  Author: Zoe Chew
+*  Date: 7/27/19
+*  Code version: n/a
+*  URL: https://medium.com/@whizzoe/in-5-mins-set-up-google-login-to-sign-up-users-on-django-e71d5c38f5d5
+*  Software License: Not released under license, part of tutorial
+*
+***************************************************************************************/
+{% endcomment %}
+
+{% load socialaccount %}
+<html>
+  <head>
+    <title>Google Registration</title>
+  </head>
+  <body>
+  {% if user.is_authenticated %}
+  <h1>My Google Login Project</h1>
+  <p>Welcome, {{ user.username }}!</p>
+  <a href="accounts/logout/">Log out?<a>
+ 
+  {% else %}
+  <h1>My Google Login Project</h1>
+  <a href="{% provider_login_url 'google' %}">Login with Google</a>
+  {% endif %}
+
+  </body>
+</html>
