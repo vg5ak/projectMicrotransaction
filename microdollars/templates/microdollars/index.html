@@ -27,12 +27,14 @@
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
   </head>
   <body class="bg-darkerlight">
+    <!-- START HEADER -->
     <!-- First navbar row -->
     <div class="navbar navbar-expand-md navbar-light bg-darkerlight">
       <div class="container">
         <a href="#" class="navbar-brand nomargin">MicroDollars</a>
         {% if user.is_authenticated %}
-        
+        <!-- Sign out button -->
+        <a class="btn btn-outline-danger pull-right" role="button" href="accounts/logout/">Logout</a>
         {% else %}
         <!-- Log in/Sign up button -->
         <a class="btn btn-outline-success pull-right" role="button" href="{% provider_login_url 'google' %}">Log in/Sign up with Google</a>
@@ -57,16 +59,17 @@
         </div>
       </div>
     </div>
- 
-   {% if user.is_authenticated %}
-  <h1>My Google Login Project</h1>
-  <p>Welcome, {{ user.username }}!</p>
-  <a href="accounts/logout/">Log out?<a>
- 
-  {% else %}
-  <h1>My Google Login Project</h1>
-  <a href="{% provider_login_url 'google' %}">Login with Google</a>
-  {% endif %}
-
+    <div class="navbar navbar-expand-md bg-light">
+      <div class="container">
+        {% if user.is_authenticated %}
+        <p id="username" class="h1 navbar-brand nomargin">Welcome, {{ user.username }}!</p>
+        {% else %}
+        <p id="username" class="h1 navbar-brand nomargin">Not Logged In</p>
+        {% endif %}
+      </div>
+    </div>
+    <!-- STOP HEADER -->
+    <!-- START PAGE CONTENT -->
+    <!-- STOP PAGE CONTENT -->
   </body>
 </html>
