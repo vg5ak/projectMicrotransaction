@@ -1,0 +1,40 @@
+body {
+    background: #ebf2f8;
+}
+
+.bg-darkblue{
+    background-color: #34495E;
+}
+
+.bg-darkerlight {
+    background-color: #e9ecef;
+}
+
+.text-darkerlight {
+    color: #e9ecef;
+}
+
+
+.rounded {
+    border-radius: 7px;
+}
+
+.textright {
+    text-align: right;
+}
+
+.shiftdown {
+    margin-top: 6px;
+}
+
+.nomargin {
+    margin: 0 !important;
+}
+
+.padding {
+    padding: 15px;
+}
+
+.center {
+    margin: auto;
+}
