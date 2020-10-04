@@ -14,7 +14,6 @@ body {
     color: #e9ecef;
 }
 
-
 .rounded {
     border-radius: 7px;
 }
@@ -37,4 +36,11 @@ body {
 
 .center {
     margin: auto;
+}
+
+footer {
+    margin: 0 auto;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
 }
