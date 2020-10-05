@@ -1,0 +1,13 @@
+language: python
+python:
+- '3.8'
+install:
+- pip install -r requirements-travis.txt
+script:
+- python manage.py test
+deploy:
+  api_key:
+    secure: ggGV8aPhoqWjyIHX5Q2hhsSb6OSUJSM46ov1fmLPZOJKb7h/s5/kl6vTgFWUkp3/Q9Y9ONmpFFelV97AksaTnCFSRB6pToluQpn0VshtfW/Vd/eF9T0uA5akDCoI8HEhDD4X2tVfX5u+WvrPCg2qeQLWfAOv8n/bzotG1sMhIGMAJEK+Hmg5CVJTHgxgLvj23rUxExfPQSHYVpMPGaCFKc+Kf48Tt30c+aA59/zsHkVy39qsu5kjfQ+7y0ukpwWVcIABw5TOAAHpXvZL9FC0lSlo1wJkNfd4G7GsnDBYNi7jj+hId/TbVYK7g8rSHNTiKkHc076TOoeD3KdY4H3ucunxy1oQvuCXq7rRIbLGPUPr1VMjaZu+3F3i009kri/13nYUgM5zMCRvYoLDifgVL0gfhMGNoMqMlXRCAT3ixpc4lMqQSpsge7+IIaurr5d81P7aLSM9oyHmKzTI6SJnJsi+EeAW4eWFnPNCHjNhvodJSYa9H7Z+H4iky9Vk3nisSFL01lHrZpp8iNvqDDcK/3rhFOFFinK1KHChYoTYnj/Xq3Ff2w0batR+LQTUykqz7FvHxCs6F0xv3v+jdrqrX/6k37TlHpjiLWDC1jLnvPIHnACI7v4HxnoZW885JHmx0COx9lkeQee/OwRlInluf+AC+9WuzSQU8JYOO57AbJk=
+  app: cs3240-2jv
+  on:
+    repo: uva-cs3240-f20/project-1-38
