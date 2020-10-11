@@ -14,6 +14,11 @@ body {
     color: #e9ecef;
 }
 
+.donationitem {
+    width: 50%;
+}
+
+
 .rounded {
     border-radius: 7px;
 }
