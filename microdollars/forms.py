@@ -7,10 +7,9 @@ class DonationForm(forms.ModelForm):
     class Meta:
         model = Donation
         fields = ('donateto', 'amount', 'comment')
-        
-        # declaring class for bootstrap + custom css application
+
         widgets = {
-            'donateto': forms.TextInput(attrs={'class':'form-control donationitem'}),
+            'donateto': forms.Select(choices = Donation.ORGANIZATION_CHOICES, attrs={'class': 'form-control donationitem'}),
             'amount': forms.TextInput(attrs={'class':'form-control donationitem'}),
             'comment': forms.TextInput(attrs={'class':'form-control donationitem'}),
         }
