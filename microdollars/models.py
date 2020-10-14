@@ -20,8 +20,10 @@ class OrganizationModel(models.Model):
 # *
 # ***************************************************************************************/
 # {% endcomment %}
+
+
 class Donation(models.Model):
-    # user = models.ForeignKey(models.User, on_delete=models.SET_NULL, null=TRUE)
+    
     donateto = models.ForeignKey(OrganizationModel, on_delete=models.SET_NULL, null=True)
     amount = models.PositiveIntegerField()
     comment = models.CharField(max_length=350)

@@ -7,10 +7,10 @@ class DonationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['donateto'].queryset = OrganizationModel.objects.all()
-        
+
     class Meta:
         model = Donation
-        fields = ('donateto', 'amount', 'comment', 'user')
+        fields = ('donateto', 'amount', 'comment')
         widgets = {
             'donateto': forms.Select(attrs={'class': 'form-control donationitem'}),
             'amount': forms.TextInput(attrs={'class':'form-control donationitem'}),
