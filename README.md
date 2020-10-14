@@ -7,14 +7,17 @@ When pulling from github clear the database with
     chmod +x ./updatedb.sh
     ./updatedb.sh
 
-When pushing to github 
+When pushing to github
     chmod +x ./exportdb.sh
     ./exportdb.sh
     git add .
     git commit -m "ENTER YOUR MESSAGE"
     git push
 
-When running lazily (makes migrations, runserver for you)
+
+When running lazily (makes migrations, runserver for you):
+Will run python manage.py makemigrations, migrate, and runserver in one command
+
     ./lazy.sh
 
 Install the requirements
