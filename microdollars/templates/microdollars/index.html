@@ -1,4 +1,4 @@
-{% comment %} 
+{% comment %}
 /***************************************************************************************
 *  REFERENCES
 *  Title: In 5 mins: Set up Google login to sign up users on Django
@@ -18,7 +18,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Google Registration</title>
-    
+
     <!-- CSS only -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     {% load static %}
@@ -44,7 +44,7 @@
         {% endif %}
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
-        </button> 
+        </button>
       </div>
     </div>
     <!-- Second navbar row -->
@@ -79,8 +79,9 @@
       <br>
       <div class="row">
         <div class="col-md-12 bg-light padding rounded">
-          
+
             <form method="POST">
+              {% csrf_token %}
               {{ form }}
               <button type="submit" class="btn btn-success">Donate!</button>
             </form>
