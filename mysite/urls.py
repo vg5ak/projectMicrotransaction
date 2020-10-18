@@ -32,8 +32,10 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView # <--
 
+from microdollars import views
+
 urlpatterns = [
- path('', TemplateView.as_view(template_name="microdollars/index.html")), # <--
- path('admin/', admin.site.urls),
- path('accounts/', include('allauth.urls')),
+    path('', views.index, name='index'),
+    path('admin/', admin.site.urls),
+    path('accounts/', include('allauth.urls')),
 ]
