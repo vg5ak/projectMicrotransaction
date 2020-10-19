@@ -23,10 +23,4 @@ class OrganizationTest(TestCase):
         item = self.create_org()
         self.assertNotEqual(item.about_me, "INFO ON THIS ORGANIZATIO")
 
-#class DonationTest(TestCase):
-    #def create_donate(self):
-        #return Donation.objects.create()
-    #def test_comment(self):
-        #item = self.create_donate()
-        #self.assertContains(item.comment, "")
     
