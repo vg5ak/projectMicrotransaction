@@ -2,7 +2,7 @@ from django.test import TestCase
 
 # Create your tests here.
 from .models import  OrganizationModel, Donation
-
+ 
 class OrganizationTest(TestCase):
     #Donation.objects.create() 
     #assertEquals("RequiredOutput", This DonationModel.str())
