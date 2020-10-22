@@ -22,5 +22,4 @@ class OrganizationTest(TestCase):
     def test_false_about_me(self):
         item = self.create_org()
         self.assertNotEqual(item.about_me, "INFO ON THIS ORGANIZATIO")
-
-    
+        
