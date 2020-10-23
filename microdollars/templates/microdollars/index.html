@@ -80,6 +80,22 @@
       <div class="row">
         <div class="col-md-12 bg-light padding rounded">
 
+            {% for org in organizations %}
+              <div style="width: 46%; display: inline; float: left; margin: 2%;">
+                <div style="height: 10vh; background: url('{{ org.image.url }}') no-repeat center;"> <!-- background org image -->
+                  <h3>{{ org.organization_name }}</h3>
+                  <p>{{ org.about_me }}</p>
+                </div>
+              </div>
+            {% endfor %}
+
+        </div>
+      </div>
+
+      <br>
+      <div class="row">
+        <div class="col-md-12 bg-light padding rounded">
+
             <form method="POST">
               {% csrf_token %}
               {{ form }}

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import CreateView
-from .models import Donation
+from .models import Donation, OrganizationModel
 
 from microdollars.forms import DonationForm
 
@@ -13,5 +13,6 @@ def index(request):
     context = {
         'form': form,
         'donation_list': Donation.objects,
+        'organizations': OrganizationModel.objects.all(),
     }
     return render(request, "microdollars/index.html", context)
