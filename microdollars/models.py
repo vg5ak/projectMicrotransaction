@@ -2,6 +2,7 @@ from django.db import models
 
 class OrganizationModel(models.Model):
     organization_name = models.CharField(max_length=100)
+    image = models.ImageField(upload_to="myimages", default="/static/microdollars/missing.png")
     about_me = models.TextField(max_length = 1000, default='INFO ON THIS ORGANIZATION')
 
     def __str__(self):
