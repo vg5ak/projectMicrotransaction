@@ -81,10 +81,11 @@
         <div class="col-md-12 bg-light padding rounded">
 
             {% for org in organizations %}
-              <div style="width: 46%; display: inline; float: left; margin: 2%;">
-                <div style="height: 10vh; background: url('{{ org.image.url }}') no-repeat center;"> <!-- background org image -->
-                  <h3>{{ org.organization_name }}</h3>
-                  <p>{{ org.about_me }}</p>
+              <div style="width: 23%; display: inline; float: left; margin: 1%;">
+                <div style="color: whitesmoke; background-color: #28a745; padding: 4px; text-align: center; height: 22vh;"> <!-- background org image -->
+                  <img src="{{ org.image.url }}" style="margin-bottom: 6px; max-height: 10vh; max-width: 100%;">
+                  <h4 style="text-align: center;">{{ org.organization_name }}</h4>
+                  <p style="padding: 4px;">{{ org.about_me }}</p>
                 </div>
               </div>
             {% endfor %}
