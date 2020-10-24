@@ -82,7 +82,7 @@
 
             {% for org in organizations %}
               <div class="orgcard-outer">
-                <div class="orgcard-inner"> <!-- background org image -->
+                <div class="orgcard-inner" id="{{ org.organization_name }}" onclick="changeOrgDropdown(this)"> <!-- background org image -->
                   <img class="orgcard-img" src="{{ org.image.url }}">
                   <h4 style="text-align: center;">{{ org.organization_name }}</h4>
                   <p style="padding: 4px;">{{ org.about_me }}</p>
@@ -118,5 +118,19 @@
       </div>
     </footer>
     <!-- STOP FOOTER -->
+
+    <script>
+      function changeOrgDropdown(div) {
+        var id = div.id; // get org name from clicked card id
+        var dropdown = document.getElementById("id_donateto") // get dropdown
+        var optionsLength = dropdown.options.length;
+        for (var i = 0; i < optionsLength; i++){
+          if (dropdown.options[i].text == id){
+            dropdown.options[i].selected = true;
+            break;
+          }
+        }
+      }
+    </script>
   </body>
 </html>
