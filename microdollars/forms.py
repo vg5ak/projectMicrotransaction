@@ -1,20 +1,28 @@
 from django import forms
 from django.utils.translation import gettext_lazy
+from django.core.exceptions import ValidationError
 
 from microdollars.models import Donation, OrganizationModel
+
 
 class DonationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['donateto'].queryset = OrganizationModel.objects.all()
 
+    def clean_amount(self):
+        data = self.cleaned_data['amount']
+        if data <= 0:
+            raise ValidationError("You can't donate a non-positive amount!")
+        return data
+
     class Meta:
         model = Donation
         fields = ('donateto', 'amount', 'comment')
         widgets = {
             'donateto': forms.Select(attrs={'class': 'form-control donationitem'}),
-            'amount': forms.TextInput(attrs={'class':'form-control donationitem'}),
-            'comment': forms.TextInput(attrs={'class':'form-control donationitem'}),
+            'amount': forms.TextInput(attrs={'class': 'form-control donationitem'}),
+            'comment': forms.TextInput(attrs={'class': 'form-control donationitem'}),
         }
 
         labels = {
