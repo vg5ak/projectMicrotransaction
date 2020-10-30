@@ -49,3 +49,31 @@ footer {
     position: absolute;
     width: 100%;
 }
+
+
+.orgcard-outer {
+    width: 23%;
+    display: inline; 
+    float: left;
+    margin: 1%;
+}
+
+.orgcard-inner {
+    color: whitesmoke;
+    background-color: #28a745;
+    padding: 4px;
+    text-align: center;
+    height: 22vh;
+    transition: background 0.2s ease-in-out;
+}
+
+.orgcard-img {
+    margin-bottom: 6px;
+    max-height: 10vh;
+    max-width: 100%;
+}
+
+.orgcard-inner:hover {
+    background-color: #30c552;
+    color: white;
+}
