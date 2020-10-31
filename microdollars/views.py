@@ -12,7 +12,7 @@ def index(request):
         form.save()
     context = {
         'form': form,
-        'donation_list': Donation.objects,
+        'donation_list': Donation.objects.all().order_by('-amount')[:5],
         'organizations': OrganizationModel.objects.all(),
     }
     return render(request, "microdollars/index.html", context)

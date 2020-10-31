@@ -75,7 +75,7 @@
 
     <!-- START PAGE CONTENT -->
     <div id="maincontent" class="container">
-
+      <div class="col-sm">
       <br>
       <div class="row">
         <div class="col-md-12 bg-light padding rounded">
@@ -90,9 +90,10 @@
               </div>
             {% endfor %}
 
+
+
         </div>
       </div>
-
       <br>
       <div class="row">
         <div class="col-md-12 bg-light padding rounded">
@@ -106,6 +107,15 @@
         </div>
       </div>
       <br>
+    </div>
+    
+    <div class="col-sm">
+        {% for donation in donation_list%}
+            <p>{{donation.amount}}</p>
+        {% endfor %}
+    </div>
+    <br>
+
 
     </div>
     <!-- STOP PAGE CONTENT -->
