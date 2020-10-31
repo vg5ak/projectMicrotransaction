@@ -1,5 +1,9 @@
-body {
+html, body {
     background: #ebf2f8;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .bg-darkblue{
@@ -43,32 +47,37 @@ body {
     margin: auto;
 }
 
+/* spacer to push footer to bottom of page if page too short */
+.spacer {
+    flex: 1;
+}
+
 footer {
-    margin: 0 auto;
-    bottom: 0;
-    position: absolute;
     width: 100%;
 }
 
+.orglist {
+    display: flex;
+    flex-wrap: wrap;
+}
 
 .orgcard-outer {
     width: 23%;
-    display: inline; 
-    float: left;
     margin: 1%;
 }
 
 .orgcard-inner {
+    min-height: 28vh;
     color: whitesmoke;
     background-color: #28a745;
     padding: 4px;
     text-align: center;
-    height: 22vh;
     transition: background 0.2s ease-in-out;
 }
 
 .orgcard-img {
     margin-bottom: 6px;
+    min-height: 50px;
     max-height: 10vh;
     max-width: 100%;
 }
