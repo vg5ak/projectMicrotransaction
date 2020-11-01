@@ -85,8 +85,8 @@
                 <div class="orgcard-inner" id="{{ org.organization_name }}" onclick="changeOrgDropdown(this)"> <!-- background org image -->
                   <div class="orgcard-bg" style="background-image: url({{ org.image.url }});"></div>
                   <img class="orgcard-img" src="{{ org.image.url }}">
-                  <h4 style="text-align: center;">{{ org.organization_name }}</h4>
-                  <p style="padding: 4px;">{{ org.about_me }}</p>
+                  <h3 style="text-align: center;">{{ org.organization_name }}</h3>
+                  <h6 style="padding: 4px;">{{ org.about_me }}</h6>
                 </div>
               </div>
             {% endfor %}

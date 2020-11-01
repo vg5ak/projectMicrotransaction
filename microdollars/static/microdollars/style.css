@@ -69,12 +69,13 @@ footer {
 .orgcard-inner {
     min-height: 28vh;
     color: whitesmoke;
-    background-color: #28a745;
+    background-color: #34495E;
     padding: 4px;
     text-align: center;
     transition: background 0.2s ease-in-out;
     position: relative;
     z-index: 5;
+    text-shadow: 1px 1px 5px rgba(56, 56, 56, 0.5), 1px 1px 5px rgba(56, 56, 56, .5);
 }
 
 .orgcard-bg {
@@ -96,9 +97,10 @@ footer {
     min-height: 50px;
     max-height: 10vh;
     max-width: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .orgcard-inner:hover {
-    background-color: #30c552;
+    background-color: #47627e;
     color: white;
 }
