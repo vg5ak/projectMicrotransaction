@@ -24,7 +24,7 @@ class OrganizationModel(models.Model):
 
 
 class Donation(models.Model):
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null= True , related_name='usernames')
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null= True , related_name='usernames', default=None)
     donateto = models.ForeignKey(OrganizationModel, on_delete=models.SET_NULL, null=True)
     amount = models.PositiveIntegerField()
     comment = models.CharField(max_length=350)
@@ -33,6 +33,7 @@ class Donation(models.Model):
         obj = info.objects.all()
 
 class Search(models.Model):
-    user_search = models.CharField(max_length=350)
+    user_search = models.CharField(max_length=350,default=" ")
+    
 
 
