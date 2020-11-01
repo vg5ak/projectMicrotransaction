@@ -2,7 +2,7 @@ body {
     background: #ebf2f8;
 }
 
-.bg-darkblue{
+.bg-darkblue {
     background-color: #34495E;
 }
 
@@ -13,11 +13,6 @@ body {
 .text-darkerlight {
     color: #e9ecef;
 }
-
-.donationitem {
-    width: 50%;
-}
-
 
 .rounded {
     border-radius: 7px;
@@ -44,16 +39,13 @@ body {
 }
 
 footer {
-    margin: 0 auto;
-    bottom: 0;
-    position: absolute;
     width: 100%;
 }
 
 
 .orgcard-outer {
     width: 23%;
-    display: inline; 
+    display: inline;
     float: left;
     margin: 1%;
 }
@@ -76,4 +68,12 @@ footer {
 .orgcard-inner:hover {
     background-color: #30c552;
     color: white;
+}
+
+.hidden {
+    display: none;
+}
+
+.error {
+    font-weight: bold;
 }
