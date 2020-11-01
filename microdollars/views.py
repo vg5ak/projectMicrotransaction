@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import CreateView
 from .models import Donation, OrganizationModel
-
 from microdollars.forms import DonationForm
 
 # Create your views here.
@@ -22,7 +21,7 @@ def about(request):
 
 def gamify(request):
     print("form")
-    form = SearchForm(request.POST or None)
+    # form = SearchForm(request.POST or None)
     donations = None
 
     def usernameToUserDonations(username):
@@ -41,15 +40,16 @@ def gamify(request):
                 sum +=donation.amount
             leaderboard.append((user.username, sum))
             sum = 0
-
-    if form.is_valid():
-        # username = form.cleaned_data['user_search']
-        donations = getAllDonations()
-        for i in donations:
-            print(i)
+        return leaderboard
+    print(getAllDonations())
+    # if form.is_valid():
+    #     # username = form.cleaned_data['user_search']
+    #     donations = getAllDonations()
+    #     for i in donations:
+    #         print(i)
     
     context = {
-        'form': form,
+        # 'form': form,
         'leaderboard': donations,
     }
     
