@@ -6,7 +6,7 @@ html, body {
     min-height: 100vh;
 }
 
-.bg-darkblue{
+.bg-darkblue {
     background-color: #34495E;
 }
 
@@ -17,11 +17,6 @@ html, body {
 .text-darkerlight {
     color: #e9ecef;
 }
-
-.donationitem {
-    width: 50%;
-}
-
 
 .rounded {
     border-radius: 7px;
@@ -103,4 +98,12 @@ footer {
 .orgcard-inner:hover {
     background-color: #47627e;
     color: white;
+}
+
+.hidden {
+    display: none;
+}
+
+.error {
+    font-weight: bold;
 }

@@ -3,18 +3,20 @@ from django.utils.translation import gettext_lazy
 
 from microdollars.models import Donation, OrganizationModel
 
+
 class DonationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['donateto'].queryset = OrganizationModel.objects.all()
+        self.fields['donateto'].empty_label = None
 
     class Meta:
         model = Donation
         fields = ('donateto', 'amount', 'comment')
         widgets = {
             'donateto': forms.Select(attrs={'class': 'form-control donationitem'}),
-            'amount': forms.TextInput(attrs={'class':'form-control donationitem'}),
-            'comment': forms.TextInput(attrs={'class':'form-control donationitem'}),
+            'amount': forms.NumberInput(attrs={'class': 'form-control donationitem'}),
+            'comment': forms.TextInput(attrs={'class': 'form-control donationitem'}),
         }
 
         labels = {
