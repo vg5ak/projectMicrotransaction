@@ -78,7 +78,7 @@
       <div class="col-sm">
       <br>
       <div class="row">
-        <div class="col-md-12 bg-light padding rounded">
+        <div class="col-md-8 bg-light padding rounded">
 
             {% for org in organizations %}
               <div class="orgcard-outer">
@@ -93,11 +93,21 @@
 
 
         </div>
+        <br>
+
+        <div class="col-md-4 bg-light padding rounded">
+            {% for donation in donation_list%}
+                <p>{{donation.donateto}}: {{donation.amount}}</p>
+            {% endfor %}
+        </div>
+
+        <br>
+
       </div>
+
       <br>
       <div class="row">
         <div class="col-md-12 bg-light padding rounded">
-
             <form method="POST">
               {% csrf_token %}
               {{ form }}
@@ -106,14 +116,10 @@
 
         </div>
       </div>
-      <br>
+
     </div>
-    
-    <div class="col-sm">
-        {% for donation in donation_list%}
-            <p>{{donation.amount}}</p>
-        {% endfor %}
-    </div>
+
+
     <br>
 
 
