@@ -37,7 +37,7 @@ class Donation(models.Model):
         obj = info.objects.all()
 
 class Search(models.Model):
-    user_search = models.CharField(max_length=350,default=" ")
+    user_search = models.CharField(max_length=350, default=" ")
     
 
 

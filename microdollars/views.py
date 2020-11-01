@@ -46,6 +46,44 @@ def lookup(request):
     
     return render(request, "microdollars/lookup.html", context)
 
+def gamify(request):
+    print("form")
+    # form = SearchForm(request.POST or None)
+    donations = None
+    
+    def usernameToUserDonations(username):
+        try:
+            uid = User.objects.get(username=username)
+        except ObjectDoesNotExist:
+            return None
+        return Donation.objects.filter(user = uid)
+
+    def getAllDonations():
+        userList = User.objects.all()
+        sum = 0
+        leaderboard = []
+        for user in userList:
+            getUserDonations = usernameToUserDonations(user.username)
+            for donation in getUserDonations:
+                sum +=donation.amount
+            leaderboard.append((user.username, sum))
+            sum = 0
+        return leaderboard
+    def sortThis():
+        return sorted(getAllDonations(), key=lambda x: x[1], reverse=True)
+
+    # if form.is_valid():
+    #     # username = form.cleaned_data['user_search']
+    #     donations = getAllDonations()
+    #     for i in donations:
+    #         print(i)
+    
+    context = {
+        # 'form': form,
+        'leaderboard': sortThis(),
+    }
+    
+    return render(request, "microdollars/leaderboard.html", context)
 
 def about(request):
     return render(request, "microdollars/about.html")

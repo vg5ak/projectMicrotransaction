@@ -44,7 +44,7 @@ urlpatterns = [
     path('lookup', views.lookup , name='lookup'),
 
     path('about', views.about, name='about'),
-
+    path('leaderboard/', views.gamify, name='leaderboard'),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
 ]
