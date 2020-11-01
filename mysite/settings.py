@@ -45,6 +45,8 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+ACCOUNT_FORMS = {'login': 'microdollars.forms.CustomLoginForm'}
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',

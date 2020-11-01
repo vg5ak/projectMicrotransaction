@@ -16,3 +16,6 @@ def index(request):
         'organizations': OrganizationModel.objects.all(),
     }
     return render(request, "microdollars/index.html", context)
+
+def about(request):
+    return render(request, "microdollars/about.html")
