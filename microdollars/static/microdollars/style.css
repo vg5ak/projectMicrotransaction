@@ -73,6 +73,22 @@ footer {
     padding: 4px;
     text-align: center;
     transition: background 0.2s ease-in-out;
+    position: relative;
+    z-index: 5;
+}
+
+.orgcard-bg {
+    z-index: -1;
+    opacity: .1;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: auto 100% ;
+    width: 100%;
+    position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;;
 }
 
 .orgcard-img {
