@@ -1,8 +1,12 @@
-body {
+html, body {
     background: #ebf2f8;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-.bg-darkblue{
+.bg-darkblue {
     background-color: #34495E;
 }
 
@@ -13,11 +17,6 @@ body {
 .text-darkerlight {
     color: #e9ecef;
 }
-
-.donationitem {
-    width: 50%;
-}
-
 
 .rounded {
     border-radius: 7px;
@@ -43,37 +42,68 @@ body {
     margin: auto;
 }
 
+/* spacer to push footer to bottom of page if page too short */
+.spacer {
+    flex: 1;
+}
+
 footer {
-    margin: 0 auto;
-    bottom: 0;
-    position: absolute;
     width: 100%;
 }
 
+.orglist {
+    display: flex;
+    flex-wrap: wrap;
+}
 
 .orgcard-outer {
     width: 23%;
-    display: inline; 
-    float: left;
     margin: 1%;
 }
 
 .orgcard-inner {
+    min-height: 28vh;
     color: whitesmoke;
-    background-color: #28a745;
+    background-color: #34495E;
     padding: 4px;
     text-align: center;
-    height: 22vh;
     transition: background 0.2s ease-in-out;
+    position: relative;
+    z-index: 5;
+    text-shadow: 1px 1px 5px rgba(56, 56, 56, 0.5), 1px 1px 5px rgba(56, 56, 56, .5);
+}
+
+.orgcard-bg {
+    z-index: -1;
+    opacity: .1;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: auto 100% ;
+    width: 100%;
+    position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;;
 }
 
 .orgcard-img {
     margin-bottom: 6px;
+    min-height: 50px;
     max-height: 10vh;
     max-width: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .orgcard-inner:hover {
-    background-color: #30c552;
+    background-color: #47627e;
     color: white;
+}
+
+.hidden {
+    display: none;
+}
+
+.error {
+    font-weight: bold;
 }

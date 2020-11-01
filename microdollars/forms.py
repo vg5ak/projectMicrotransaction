@@ -3,18 +3,20 @@ from django.utils.translation import gettext_lazy
 
 from microdollars.models import Donation, OrganizationModel, Search
 
+
 class DonationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['donateto'].queryset = OrganizationModel.objects.all()
+        self.fields['donateto'].empty_label = None
 
     class Meta:
         model = Donation
         fields = ('donateto', 'amount', 'comment')
         widgets = {
             'donateto': forms.Select(attrs={'class': 'form-control donationitem'}),
-            'amount': forms.TextInput(attrs={'class':'form-control donationitem'}),
-            'comment': forms.TextInput(attrs={'class':'form-control donationitem'}),
+            'amount': forms.NumberInput(attrs={'class': 'form-control donationitem'}),
+            'comment': forms.TextInput(attrs={'class': 'form-control donationitem'}),
         }
 
         labels = {
@@ -48,3 +50,11 @@ class OrganizationForm(forms.ModelForm):
             'about_me': gettext_lazy('About this Organization'),
         }
         # def __unicode__
+
+from allauth.account.forms import LoginForm
+
+class CustomLoginForm(LoginForm):
+    def __init__(self, *args, **kwargs):
+        super(CustomLoginForm, self).__init__(*args, **kwargs)
+        self.fields['login'].widget = forms.TextInput(attrs={'class': 'form-control'})
+        self.fields['password'].widget = forms.PasswordInput(attrs={'class': 'form-control'})
