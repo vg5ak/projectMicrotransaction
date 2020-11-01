@@ -17,7 +17,7 @@
     <!-- Required meta tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>MicroDollars</title>
+    <title>Google Registration</title>
 
     <!-- CSS only -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -28,9 +28,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-    
-    <script src="https://www.paypal.com/sdk/js?client-id=AWylIyJKwiuyxCjW6IY-eF0WTFG_IWCBGJXxUhBtV351q8tz7KgLUoGy6rKt73Y5PY9t1UYCcekVf_lz"></script>
-
   </head>
   <body class="bg-darkerlight">
     <!-- START HEADER -->
@@ -80,135 +77,94 @@
         {% endif %}
       </div>
     </div>
+
+    <div class ="row">
+        <div class="col-md-12 bg-light padding rounded">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form }}
+                <button type = "submit" class="btn btn-success">Search</button>
+            </form>
+        </div>
+    </div>
+    
+    <div class = "col-sm">
+        {% for donation in donation_list_search %}    
+            <p> {{ donation.donateto }} </p>
+        {% endfor %}
+    </div>
+
+    <!-- <p>{{ forms.user_email }} </p> -->
+    
+    
     <!-- STOP HEADER -->
 
     <!-- START PAGE CONTENT -->
-    <div id="maincontent" class="container">
-
-      <br>
-      <div class="row">
-        <div class="col-md-12 bg-light padding rounded orglist">
-
-            {% for org in organizations %}
-              <div class="orgcard-outer">
-                <div class="orgcard-inner" id="{{ org.organization_name }}" onclick="changeOrgDropdown(this)"> <!-- background org image -->
-                  <div class="orgcard-bg" style="background-image: url({{ org.image.url }});"></div>
-                  <img class="orgcard-img" src="{{ org.image.url }}">
-                  <h3 style="text-align: center;">{{ org.organization_name }}</h3>
-                  <h6 style="padding: 4px;">{{ org.about_me }}</h6>
-                </div>
-              </div>
-            {% endfor %}
-
-        </div>
-      </div>
+    <!-- <div id="maincontent" class="container">
 
       <br>
       <div class="row">
         <div class="col-md-12 bg-light padding rounded">
-          <div class="row justify-content-center">
-            <div class="col-sm-12 col-md-8">
-              <form id="donationform" method="POST">
-                <div id="empty_error" class="hidden error">Amount can't be empty!</div>
-                <div id="amount_error" class="hidden error">Amount must be positive!</div>
-                <div id="decimal_error" class="hidden error">Too many decimals!</div>
-                {% csrf_token %}
-                {{ form }}
-              </form>
-            </div>
-          </div>
-          <div class="row justify-content-center">
-            <div class="col-sm-12 col-md-8 col-lg-4">
-              <div id="paypal-button-container"></div>
-            </div>
-          </div>
-          <script>
-              function getDecimals(val) {
-                var text = val.toString();
-                var index = text.indexOf(".");
-                var decimals = 0;
-                if(index != -1){
-                  decimals = text.length - index - 1;
-                }
-                else{
-                  decimals = 0;
-                }
-                console.log(decimals)
-                return decimals
-              }
-              paypal.Buttons({
-                fundingSource: paypal.FUNDING.PAYPAL,
-                style: {
-                  layout:  'horizontal'
-                },
-                onInit: function(data, actions) {
-                  // Disable the buttons
-                  actions.disable();
-                  console.log("init!")
-                  // Listen for changes to the checkbox
-                  document.querySelector('#id_amount')
-                    .addEventListener('input', function(event) {
-                      // Enable or disable the button when it is checked or unchecked
-                      console.log("listening")
-                      console.log(getDecimals(event.target.value))
-                      if (event.target.value > 0 && getDecimals(event.target.value) <= 2) {
-                        console.log("enabled")
-                        actions.enable();
-                      } else {
-                        actions.disable();
-                      }
-                    });
-                },
-                onClick: function() {
-                  var amount = document.querySelector('#id_amount').value
 
-                  document.querySelector('#empty_error').classList.add('hidden');
-                  document.querySelector('#amount_error').classList.add('hidden');
-                  document.querySelector('#decimal_error').classList.add('hidden');
+            {% for org in organizations %}
+              <div class="orgcard-outer">
+                <div class="orgcard-inner" id="{{ org.organization_name }}" onclick="changeOrgDropdown(this)"> <!-- background org image -->
+                  <!-- <img class="orgcard-img" src="{{ org.image.url }}">
+                  <h4 style="text-align: center;">{{ org.organization_name }}</h4>
+                  <p style="padding: 4px;">{{ org.about_me }}</p>
+                </div>
+              </div>
+            {% endfor %} -->
 
-                  if(amount == "") {
-                    document.querySelector('#empty_error').classList.remove('hidden');
-                  }
-                  else{
-                    if (amount <= 0) {
-                    document.querySelector('#amount_error').classList.remove('hidden');
-                    }
-                    if (amount != ""  && getDecimals(amount) > 2) {
-                      document.querySelector('#decimal_error').classList.remove('hidden');
-                    }
-                  }
-                },
-                createOrder: function(data, actions) {
-                  // This function sets up the details of the transaction, including the amount and line item details.
-                  return actions.order.create({
-                    purchase_units: [{
-                      amount: {
-                        value: document.getElementById("id_amount").value
-                      }
-                    }],
-                    application_context: {
-                      shipping_preference: "NO_SHIPPING",
-                    },
-                  });
-                },
-                onApprove: function(data, actions) {
-                  // This function captures the funds from the transaction.
-                  return actions.order.capture().then(function(details) {
-                    // This function shows a transaction success message to your buyer.
-                    document.getElementById("donationform").submit();
-                  });
+        <!-- </div>
+      </div> --> 
+
+      <!-- <br>
+      <div class="row">
+        <div class="col-md-12 bg-light padding rounded">
+
+            <form method="POST">
+              {% csrf_token %}
+              {{ form }}
+              <button type="submit" class="btn btn-success">Donate!</button>
+            </form>
+            <script
+        src="https://www.paypal.com/sdk/js?client-id=AWylIyJKwiuyxCjW6IY-eF0WTFG_IWCBGJXxUhBtV351q8tz7KgLUoGy6rKt73Y5PY9t1UYCcekVf_lz"> // Required. Replace SB_CLIENT_ID with your sandbox client ID.
+      </script>
+      
+      <div id="paypal-button-container"></div>
+      <script>
+        paypal.Buttons({
+          createOrder: function(data, actions) {
+            // This function sets up the details of the transaction, including the amount and line item details.
+
+            // createOrder: (data, actions) => { return actions.order.create({ intent: "CAPTURE", 
+            // purchase_units: [], application_context: { shipping_preference: "NO_SHIPPING", }, }); }
+            return actions.order.create({ intent : "CAPTURE",
+              purchase_units: [{
+                amount: {
+                  value: document.getElementById("id_amount").value
                 }
-              }).render('#paypal-button-container');
-              // This function displays Smart Payment Buttons on your web page.
-          </script>
+              }], 
+              application_context: {
+              shipping_preference: "NO_SHIPPING",
+                },
+            });
+          }
+        }).render('#paypal-button-container');
+      </script>
         </div>
       </div>
       <br>
-    </div>
-    <!-- STOP PAGE CONTENT -->
 
+    </div> -->
+    <!-- STOP PAGE CONTENT -->
+    
+      
+   
+    
+    
     <!-- START FOOTER -->
-    <div class="spacer"></div>
     <footer class="font-small bg-darkblue text-darkerlight">
       <div class="footer-copyright text-center py-3">
         2020
