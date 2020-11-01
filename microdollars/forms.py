@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.translation import gettext_lazy
 
-from microdollars.models import Donation, OrganizationModel
+from microdollars.models import Donation, OrganizationModel, Search
 
 class DonationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -18,12 +18,23 @@ class DonationForm(forms.ModelForm):
         }
 
         labels = {
+        
             'donateto': gettext_lazy('Donate to'),
             'amount': gettext_lazy('Amount'),
             'comment': gettext_lazy('Comment'),
+            
         }
 
-
+class SearchForm(forms.ModelForm):
+    class Meta:
+        model = Search
+        fields = ('user_search',)
+        widgets = {
+            'user_search' : forms.TextInput(attrs={'class': 'form-control donationitem'})
+        }
+        labels = {
+            'user_search' : gettext_lazy("Input a user's name: ")
+        }
 class OrganizationForm(forms.ModelForm):
     class Meta:
         model = OrganizationModel

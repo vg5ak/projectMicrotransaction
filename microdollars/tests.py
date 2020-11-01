@@ -11,7 +11,7 @@ class OrganizationTest(TestCase):
     def test_about_me(self):
         item = self.create_org()
         self.assertEquals("INFO ON THIS ORGANIZATION", item.about_me )
-    
+               
     def test_organization_name(self):
         item = self.create_org()
         self.assertEquals(item.organization_name, "")

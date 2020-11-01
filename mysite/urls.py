@@ -40,6 +40,7 @@ from django.conf.urls.static import static # new
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('lookup.html', views.lookup , name='lookup'),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
 ]

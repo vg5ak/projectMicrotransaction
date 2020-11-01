@@ -53,7 +53,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="index.html">Home<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">About</a>
@@ -74,10 +74,30 @@
         {% endif %}
       </div>
     </div>
+
+    <div class ="row">
+        <div class="col-md-12 bg-light padding rounded">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form }}
+                <button type = "submit" class="btn btn-success">Search</button>
+            </form>
+        </div>
+    </div>
+    
+    <div class = "col-sm">
+        {% for donation in donation_list_search %}    
+            <p> {{ donation.donateto }} </p>
+        {% endfor %}
+    </div>
+
+    <!-- <p>{{ forms.user_email }} </p> -->
+    
+    
     <!-- STOP HEADER -->
 
     <!-- START PAGE CONTENT -->
-    <div id="maincontent" class="container">
+    <!-- <div id="maincontent" class="container">
 
       <br>
       <div class="row">
@@ -86,25 +106,23 @@
             {% for org in organizations %}
               <div class="orgcard-outer">
                 <div class="orgcard-inner" id="{{ org.organization_name }}" onclick="changeOrgDropdown(this)"> <!-- background org image -->
-                  <img class="orgcard-img" src="{{ org.image.url }}">
+                  <!-- <img class="orgcard-img" src="{{ org.image.url }}">
                   <h4 style="text-align: center;">{{ org.organization_name }}</h4>
                   <p style="padding: 4px;">{{ org.about_me }}</p>
                 </div>
               </div>
-            {% endfor %}
+            {% endfor %} -->
 
-        </div>
-      </div>
+        <!-- </div>
+      </div> --> 
 
-      <br>
+      <!-- <br>
       <div class="row">
         <div class="col-md-12 bg-light padding rounded">
 
             <form method="POST">
               {% csrf_token %}
-              
               {{ form }}
-              
               <button type="submit" class="btn btn-success">Donate!</button>
             </form>
             <script
@@ -136,7 +154,7 @@
       </div>
       <br>
 
-    </div>
+    </div> -->
     <!-- STOP PAGE CONTENT -->
     
       

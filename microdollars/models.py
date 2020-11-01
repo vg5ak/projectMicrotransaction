@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 class OrganizationModel(models.Model):
     organization_name = models.CharField(max_length=100)
     image = models.ImageField(upload_to="myimages", default="/static/microdollars/missing.png")
@@ -24,10 +24,15 @@ class OrganizationModel(models.Model):
 
 
 class Donation(models.Model):
-    
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null= True , related_name='usernames')
     donateto = models.ForeignKey(OrganizationModel, on_delete=models.SET_NULL, null=True)
     amount = models.PositiveIntegerField()
     comment = models.CharField(max_length=350)
 
     def convertToTuple(self, info):
         obj = info.objects.all()
+
+class Search(models.Model):
+    user_search = models.CharField(max_length=350)
+
+
