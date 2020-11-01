@@ -81,7 +81,7 @@
 
       <br>
       <div class="row">
-        <div class="col-md- bg-light padding rounded">
+        <div class="col-md-12 bg-light padding rounded">
 
             {% for org in organizations %}
               <div class="orgcard-outer">
@@ -144,7 +144,6 @@
                       // Enable or disable the button when it is checked or unchecked
                       console.log("listening")
                       console.log(getDecimals(event.target.value))
-
                       if (event.target.value > 0 && getDecimals(event.target.value) <= 2) {
                         console.log("enabled")
                         actions.enable();
@@ -198,8 +197,6 @@
         </div>
       </div>
       <br>
-      
-
     </div>
     <!-- STOP PAGE CONTENT -->
 
