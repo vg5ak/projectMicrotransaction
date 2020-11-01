@@ -43,5 +43,6 @@ urlpatterns = [
     path('about', views.about, name='about'),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
+    path('leaderboard/', views.gamify, name='leaderboard'),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
