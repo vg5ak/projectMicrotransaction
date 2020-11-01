@@ -22,6 +22,7 @@ def index(request):
 
 
 
+
 def lookup(request):
     print("form")
     form = SearchForm(request.POST or None)
@@ -44,4 +45,8 @@ def lookup(request):
     }
     
     return render(request, "microdollars/lookup.html", context)
+
+
+def about(request):
+    return render(request, "microdollars/about.html")
 
