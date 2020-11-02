@@ -129,7 +129,7 @@ class DonationFormAndViewTest(TestCase):
         user.save()
 
         self.assertEqual(Donation.objects.count(), 0)
-        # response = self.client.post(
-        #     "/", data={"user": user.id, "donateto": org.id, "amount": 50, "comment": "Here's 50 dollars"}
-        # )
-        # self.assertEqual(Donation.objects.count(), 1)
+        response = self.client.post(
+            "/", data={"user": user.id, "donateto": org.id, "amount": 50, "comment": "Here's 50 dollars"}
+        )
+        self.assertEqual(Donation.objects.count(), 1)
