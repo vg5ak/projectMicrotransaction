@@ -11,7 +11,7 @@ def index(request):
     form = DonationForm(request.POST or None)
     if form.is_valid():
         tempForm = form.save(commit=False)
-        if tempForm.user and not tempForm.user.is_anonymous:
+        if request.user and not request.user.is_anonymous:
             tempForm.user = request.user
         else:
             tempForm.user = None
