@@ -162,10 +162,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-DATABASES['default'] = dj_database_url.config(
-    conn_max_age=600, ssl_require=True)
 
 if 'I_AM_HEROKU' in os.environ:
     # Configure Django App for Heroku.
-
+    DATABASES['default'] = dj_database_url.config(
+        conn_max_age=600, ssl_require=True)
     django_heroku.settings(locals())
