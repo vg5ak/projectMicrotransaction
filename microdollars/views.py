@@ -4,6 +4,7 @@ from .models import Donation, OrganizationModel, Search
 from django.contrib.auth.models import User
 from microdollars.forms import DonationForm, SearchForm, Search
 from django.core.exceptions import ObjectDoesNotExist
+from collections import Counter 
 # Create your views here.
 
 def index(request):
@@ -27,21 +28,84 @@ def lookup(request):
     print("form")
     form = SearchForm(request.POST or None)
     donations = None
-
+    ystuff = None
+    xstuff = None
     def usernameToUserDonations(username):
         try:
             uid = User.objects.get(username=username)
         except ObjectDoesNotExist:
             return None
         return Donation.objects.filter(user = uid)
+
+
+    def GraphY(username):
+        orginal_list = [] 
+        Org_dict = { 1 : "Boys and Girls Association",  2: "Alcoholics Anonymous", 3: "World Wildlife Fund" , 
+        4 : "The Salvation Army" ,  5: "Doctors Without Borders USA", 6: "American National Red Cross"}
+        try:
+            ##Get's all donations objects that have the been donated by the USER
+            user_donations = User.objects.get(username=username)
+        except ObjectDoesNotExist:
+            return None
+
+        Pie_data = Donation.objects.filter(user = user_donations).values_list("donateto")
+        Pie_data = list(Pie_data)
+       
+        orginal_list.append(Pie_data)
+        maybe = [x[0] for x in Pie_data]
+        please = [Org_dict[i] for i in maybe]
+
+        return list(Counter(please).keys())
+    def GraphX(username):
+        orginal_list = [] 
+ 
+
+        Org_dict = { 1 : "Boys and Girls Association",  2: "Alcoholics Anonymous", 3: "World Wildlife Fund" , 
+        4 : "The Salvation Army" ,  5: "Doctors Without Borders USA", 6: "American National Red Cross"}
+        try:
+            ##Get's all donations objects that have the been donated by the USER
+            user_donations = User.objects.get(username=username)
+        except ObjectDoesNotExist:
+            return None
+
+        Pie_data = Donation.objects.filter(user = user_donations).values_list("donateto")
+        Pie_data = list(Pie_data)
+       
+        orginal_list.append(Pie_data)
+        maybe = [x[0] for x in Pie_data]
+        please = [Org_dict[i] for i in maybe]
+        #Counter(please).keys() = ydata
+        
+        return list(Counter(please).values())
+
     if form.is_valid():
         username = form.cleaned_data['user_search']
         print(username)
         donations = usernameToUserDonations(username)
+        
+        ystuff = GraphY(username)
+        print(ystuff)
+        xstuff = GraphX(username)
+        print(xstuff)
+        #print(test)
+    ###Get's all the donations that they donated to
     
+    # def GetOrganizations(username):
+    #     try:
+    #         orgs = User.objects.get(username = username)
+    #     except ObjectDoesNotExist:
+    #         return None
+    #     return OrganizationModel.objects.get(user = orgs)
+
+    # ydata = [52, 48, 160, 94, 75, 71, 490, 82, 46, 17]
+  
+  
     context = {
         'form': form,
         'donation_list_search': donations,
+        'data': xstuff,
+        'labels': ystuff,
+
     }
     
     return render(request, "microdollars/lookup.html", context)
