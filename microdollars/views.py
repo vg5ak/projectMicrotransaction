@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from microdollars.forms import DonationForm, SearchForm, Search
 from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
-
+from django.contrib.auth.models import User
 
 def index(request):
     form = DonationForm(request.POST or None)
@@ -23,6 +23,21 @@ def index(request):
     }
     return render(request, "microdollars/index.html", context)
 
+def profile(request):
+    #form = DonationForm(request.POST or None)
+    #if form.is_valid():
+    #    tempForm = form.save(commit=False)
+    #    if request.user and not request.user.is_anonymous:
+    #        tempForm.user = request.user
+    #    else:
+    #        tempForm.user = None
+    #    tempForm.save()
+    context = {
+        #'form': form,
+        #'donation_list': Donation.objects,
+        'userprofile': User.objects.values().get(username=request.user),
+    }
+    return render(request, "microdollars/profile.html", context)
 
 def lookup(request):
     print("form")
