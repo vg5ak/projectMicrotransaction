@@ -40,13 +40,4 @@ class Donation(models.Model):
 class Search(models.Model):
     user_search = models.CharField(max_length=350, default=" ")
 
-"""    
-class Profile(models.Model):
-    last_login = models.odels.DateTimeField()
-    is_superuser = models.BooleanField()
-    username = models.CharField(max_length=150, blank=True)
-    first_name = models.CharField(max_length=150, blank=True)
-    last_name = models.CharField(max_length=150, blank=True)
-    email = models.CharField(max_length=150, blank=True)
-    date_joined
-"""
+
