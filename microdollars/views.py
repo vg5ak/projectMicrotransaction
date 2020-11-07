@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import CreateView
 from .models import Donation, OrganizationModel, Search
 from django.contrib.auth.models import User
-from microdollars.forms import DonationForm, SearchForm, Search
+from microdollars.forms import ProfileForm, DonationForm, SearchForm, Search
 from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
 from django.contrib.auth.models import User
@@ -24,18 +24,11 @@ def index(request):
     return render(request, "microdollars/index.html", context)
 
 def profile(request):
-    #form = DonationForm(request.POST or None)
-    #if form.is_valid():
-    #    tempForm = form.save(commit=False)
-    #    if request.user and not request.user.is_anonymous:
-    #        tempForm.user = request.user
-    #    else:
-    #        tempForm.user = None
-    #    tempForm.save()
+    form = ProfileForm(request.POST or None, instance=request.user)
+    if form.is_valid():
+        form.save()
     context = {
-        #'form': form,
-        #'donation_list': Donation.objects,
-        'userprofile': User.objects.values().get(username=request.user),
+        'form': form,
     }
     return render(request, "microdollars/profile.html", context)
 

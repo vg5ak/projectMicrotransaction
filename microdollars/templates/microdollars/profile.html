@@ -81,13 +81,15 @@
 
     <!-- START PAGE CONTENT -->
     <div id="maincontent" class="container">
-
       <br>
       <div class="row">
-        <div class="col-md-12 bg-light padding rounded">
-            {% csrf_token %}
-            {{ userprofile }}
-
+        <div class="col-md-8 bg-light padding rounded" style="margin-left: auto; margin-right: auto; padding: 2%;">
+            <form id="profileform" method="POST">
+                {% csrf_token %}
+                {{ form }}
+                <br>
+                <button type="submit" class="btn btn-success">Update Profile</button>
+            </form>
         </div>
       </div>
       <br>

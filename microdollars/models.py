@@ -32,12 +32,21 @@ class Donation(models.Model):
     donateto = models.ForeignKey(OrganizationModel, on_delete=models.SET_NULL, null=True)
     amount = models.DecimalField(decimal_places=2, max_digits=10)
     comment = models.CharField(max_length=350, blank=True)
+    models.CharField(max_length=350, blank=True)
 
     def convertToTuple(self, info):
         obj = info.objects.all()
 
 class Search(models.Model):
     user_search = models.CharField(max_length=350, default=" ")
-    
 
-
+"""    
+class Profile(models.Model):
+    last_login = models.odels.DateTimeField()
+    is_superuser = models.BooleanField()
+    username = models.CharField(max_length=150, blank=True)
+    first_name = models.CharField(max_length=150, blank=True)
+    last_name = models.CharField(max_length=150, blank=True)
+    email = models.CharField(max_length=150, blank=True)
+    date_joined
+"""
