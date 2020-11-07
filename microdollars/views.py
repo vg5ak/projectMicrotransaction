@@ -25,10 +25,13 @@ def index(request):
 
 def profile(request):
     form = ProfileForm(request.POST or None, instance=request.user)
+    message = ""
     if form.is_valid():
         form.save()
+        message = '<div class="alert alert-success" role="alert">Successfully updated profile!</div>'
     context = {
         'form': form,
+        'message': message,
     }
     return render(request, "microdollars/profile.html", context)
 
