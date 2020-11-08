@@ -52,10 +52,10 @@ def lookup(request):
         Pie_data = list(Pie_data)
        
         orginal_list.append(Pie_data)
-        maybe = [x[0] for x in Pie_data]
-        please = [Org_dict[i] for i in maybe]
-
-        return list(Counter(please).keys())
+        number_of_occurences = [x[0] for x in Pie_data]
+        occurences_tied_to_organization = [Org_dict[i] for i in number_of_occurences]
+        ##Keys were the names of the organization
+        return list(Counter(occurences_tied_to_organization).keys())
     def GraphX(username):
         orginal_list = [] 
  
@@ -72,11 +72,11 @@ def lookup(request):
         Pie_data = list(Pie_data)
        
         orginal_list.append(Pie_data)
-        maybe = [x[0] for x in Pie_data]
-        please = [Org_dict[i] for i in maybe]
-        #Counter(please).keys() = ydata
-        
-        return list(Counter(please).values())
+        number_of_occurences  = [x[0] for x in Pie_data]
+        occurences_tied_to_organization = [Org_dict[i] for i in number_of_occurences]
+
+        ##Values were the number of donations that were counted with that group
+        return list(Counter(occurences_tied_to_organization).values())
 
     if form.is_valid():
         username = form.cleaned_data['user_search']

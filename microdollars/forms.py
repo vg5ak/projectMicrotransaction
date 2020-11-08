@@ -44,7 +44,7 @@ class SearchForm(forms.ModelForm):
             'user_search': forms.TextInput(attrs={'class': 'form-control donationitem'})
         }
         labels = {
-            'user_search': gettext_lazy("Input a user's name: ")
+            'user_search': gettext_lazy("Input a user's name ")
         }
 
 

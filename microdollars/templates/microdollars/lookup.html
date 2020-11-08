@@ -88,6 +88,11 @@
         </div>
     </div>
     
+    <div class = "col-sm">
+      {% for donation in donation_list_search %}    
+          <p> {{ donation.donateto }} </p>
+      {% endfor %}
+  </div>
  
 {% block content %}
 <h1>Pie Chart Population</h1>
