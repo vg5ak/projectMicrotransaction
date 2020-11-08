@@ -65,7 +65,7 @@ def lookup(request):
         for donation in userDonations:
             orgName = donation.donateto.organization_name
             orgToTotalDonations[orgName] = orgToTotalDonations.get(
-                orgName, 0) + float(donation.amount)
+                orgName, 0) + donation.amount
         return orgToTotalDonations
 
     if form.is_valid():
@@ -73,7 +73,8 @@ def lookup(request):
         donationTable = DonationTable(usernameToUserDonations(username))
         RequestConfig(request).configure(donationTable)
         orgToTotalDonations = calcDonationsPerOrg(username)
-        data = list(orgToTotalDonations.values())
+        data = [float(val)
+                for val in list(orgToTotalDonations.values())]
         labels = list(orgToTotalDonations.keys())
 
     context = {
