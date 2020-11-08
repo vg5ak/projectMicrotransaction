@@ -12,6 +12,7 @@
 {% endcomment %}
 
 {% load socialaccount %}
+{% load render_table from django_tables2 %}
 <html>
   <head>
     <!-- Required meta tags -->
@@ -80,94 +81,64 @@
         {% endif %}
       </div>
     </div>
-
-    <div class ="row">
-        <div class="col-md-12 bg-light padding rounded">
-            <form method="POST">
-                {% csrf_token %}
-                {{ form }}
-                <button type = "submit" class="btn btn-success">Search</button>
-            </form>
-        </div>
-    </div>
-    
-    <div class = "col-sm">
-        {% for donation in donation_list_search %}    
-            <p> {{ donation.donateto }} </p>
-        {% endfor %}
-    </div>
-
-    <!-- <p>{{ forms.user_email }} </p> -->
-    
-    
-    <!-- STOP HEADER -->
-
-    <!-- START PAGE CONTENT -->
-    <!-- <div id="maincontent" class="container">
-
+    <div id="maincontent" class="container">
       <br>
-      <div class="row">
+      <div class ="row">
+          <div class="col-md-12 bg-light padding rounded">
+              <form method="GET">
+                  {% comment %} {% csrf_token %} {% endcomment %}
+                  {{ form }}
+                  <br>
+                  <button type = "submit" class="btn btn-success">Search</button>
+              </form>
+          </div>
+      </div>
+      <br>
+      {% if donationTable %}
+      <div class ="row">
         <div class="col-md-12 bg-light padding rounded">
-
-            {% for org in organizations %}
-              <div class="orgcard-outer">
-                <div class="orgcard-inner" id="{{ org.organization_name }}" onclick="changeOrgDropdown(this)"> <!-- background org image -->
-                  <!-- <img class="orgcard-img" src="{{ org.image.url }}">
-                  <h4 style="text-align: center;">{{ org.organization_name }}</h4>
-                  <p style="padding: 4px;">{{ org.about_me }}</p>
-                </div>
-              </div>
-            {% endfor %} -->
-
-        <!-- </div>
-      </div> --> 
-
-      <!-- <br>
-      <div class="row">
-        <div class="col-md-12 bg-light padding rounded">
-
-            <form method="POST">
-              {% csrf_token %}
-              {{ form }}
-              <button type="submit" class="btn btn-success">Donate!</button>
-            </form>
-            <script
-        src="https://www.paypal.com/sdk/js?client-id=AWylIyJKwiuyxCjW6IY-eF0WTFG_IWCBGJXxUhBtV351q8tz7KgLUoGy6rKt73Y5PY9t1UYCcekVf_lz"> // Required. Replace SB_CLIENT_ID with your sandbox client ID.
-      </script>
-      
-      <div id="paypal-button-container"></div>
-      <script>
-        paypal.Buttons({
-          createOrder: function(data, actions) {
-            // This function sets up the details of the transaction, including the amount and line item details.
-
-            // createOrder: (data, actions) => { return actions.order.create({ intent: "CAPTURE", 
-            // purchase_units: [], application_context: { shipping_preference: "NO_SHIPPING", }, }); }
-            return actions.order.create({ intent : "CAPTURE",
-              purchase_units: [{
-                amount: {
-                  value: document.getElementById("id_amount").value
-                }
-              }], 
-              application_context: {
-              shipping_preference: "NO_SHIPPING",
-                },
-            });
-          }
-        }).render('#paypal-button-container');
-      </script>
+           {% render_table donationTable %}
         </div>
       </div>
       <br>
-
-    </div> -->
-    <!-- STOP PAGE CONTENT -->
-    
-      
-   
-    
-    
-    <!-- START FOOTER -->
+      {% endif %}
+      {% if data and labels %}
+      <div class ="row">
+        <div class="col-md-12 bg-light padding rounded d-flex justify-content-center">
+          <div class="col-md-6">
+            <h2>Donation Amounts by Organization for {{user.username}}</h2>
+            <div id="container">
+                <canvas id="pie-chart"></canvas>
+            </div>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script><script>
+              var config = {
+                type: 'pie',
+                data: {
+                  datasets: [{
+                    data: {{ data|safe }},
+                    backgroundColor: [
+                      '#ff0000', '#0000ff', '#ff0080', '#73ffff', '#5c26ff', '#002db3', '#ffff26', '#4cff4c', '#ff00ff'
+                    ],
+                    label: 'Population'
+                  }],
+                  labels: {{ labels|safe }}
+                },
+                options: {
+                  responsive: true
+                }
+              };
+          
+              window.onload = function() {
+                var ctx = document.getElementById('pie-chart').getContext('2d');
+                window.myPie = new Chart(ctx, config);
+              };
+            </script>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      <br>
+    </div>
     <footer class="font-small bg-darkblue text-darkerlight">
       <div class="footer-copyright text-center py-3">
         2020

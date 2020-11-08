@@ -2,7 +2,8 @@ from allauth.account.forms import LoginForm
 from django import forms
 from django.utils.translation import gettext_lazy
 from django.core.exceptions import ValidationError
-
+from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 from microdollars.models import Donation, OrganizationModel, Search
 from django.contrib.auth.models import User
 
@@ -72,8 +73,17 @@ class SearchForm(forms.ModelForm):
             'user_search': forms.TextInput(attrs={'class': 'form-control donationitem'})
         }
         labels = {
-            'user_search': gettext_lazy("Input a user's name: ")
+            'user_search': gettext_lazy("Input a username")
         }
+
+    def clean_user_search(self):
+        username = self.cleaned_data['user_search']
+        try:
+            uid = User.objects.get(username=username)
+        except ObjectDoesNotExist:
+            raise ValidationError(
+                ('Username ' + username + ' does not exist'), code='noUserError')
+        return username
 
 
 class OrganizationForm(forms.ModelForm):
