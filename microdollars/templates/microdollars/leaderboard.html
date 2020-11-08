@@ -82,19 +82,30 @@
     </div>
 
     <div id="maincontent" class="container">
-      <div class ="row">
-          <div class="col-md-12 bg-light padding rounded">
-              {% for person in leaderboard %}
-              <p>{{person.0}} {{person.1}}</p>
-              {%endfor%}
-          </div>
+        <div class = "row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="font-family:helvetica">Person</th>
+                        <th style="font-family:helvetica">Amount Donated</th>
+                        <th style="font-family:helvetica">Level</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  {% for person in leaderboard %}
+                  <tr>
+                    <td style="font-family:helvetica">{{person.0}}</td>
+                    <td style="font-family:helvetica">{{'$'}}{{person.1}}</td>
+                    <td style="">&#{{person.2}} </td>
+                  </tr>
+                  {%endfor%}
+                </tbody>
+          </table>
       </div>
     </div>
-    
-
     <!-- <p>{{ forms.user_email }} </p> -->
-    
-    
+
+
     <!-- STOP HEADER -->
 
     <!-- START PAGE CONTENT -->
@@ -115,7 +126,7 @@
             {% endfor %} -->
 
         <!-- </div>
-      </div> --> 
+      </div> -->
 
       <!-- <br>
       <div class="row">
@@ -129,21 +140,21 @@
             <script
         src="https://www.paypal.com/sdk/js?client-id=AWylIyJKwiuyxCjW6IY-eF0WTFG_IWCBGJXxUhBtV351q8tz7KgLUoGy6rKt73Y5PY9t1UYCcekVf_lz"> // Required. Replace SB_CLIENT_ID with your sandbox client ID.
       </script>
-      
+
       <div id="paypal-button-container"></div>
       <script>
         paypal.Buttons({
           createOrder: function(data, actions) {
             // This function sets up the details of the transaction, including the amount and line item details.
 
-            // createOrder: (data, actions) => { return actions.order.create({ intent: "CAPTURE", 
+            // createOrder: (data, actions) => { return actions.order.create({ intent: "CAPTURE",
             // purchase_units: [], application_context: { shipping_preference: "NO_SHIPPING", }, }); }
             return actions.order.create({ intent : "CAPTURE",
               purchase_units: [{
                 amount: {
                   value: document.getElementById("id_amount").value
                 }
-              }], 
+              }],
               application_context: {
               shipping_preference: "NO_SHIPPING",
                 },
@@ -157,11 +168,11 @@
 
     </div> -->
     <!-- STOP PAGE CONTENT -->
-    
-      
-   
-    
-    
+
+
+
+
+
     <!-- START FOOTER -->
     <footer class="font-small bg-darkblue text-darkerlight">
       <div class="footer-copyright text-center py-3">
