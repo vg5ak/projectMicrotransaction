@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from microdollars.forms import DonationForm, SearchForm, Search
 from django.core.exceptions import ObjectDoesNotExist
 from django_tables2.config import RequestConfig
+from collections import Counter
 # Create your views here.
 
 
@@ -37,18 +38,32 @@ def usernameToUserDonations(username):
 def lookup(request):
     print("form")
     form = SearchForm(request.GET or None)
-    donations = None
     donationTable = None
+    data = None
+    labels = None
+
+    def calcDonationsPerOrg(username):
+        userDonations = usernameToUserDonations(username)
+        orgToTotalDonations = dict()
+        for donation in userDonations:
+            orgName = donation.donateto.organization_name
+            orgToTotalDonations[orgName] = orgToTotalDonations.get(
+                orgName, 0) + float(donation.amount)
+        return orgToTotalDonations
 
     if form.is_valid():
         username = form.cleaned_data['user_search']
-        if(usernameToUserDonations(username)):
-            donationTable = DonationTable(usernameToUserDonations(username))
-            RequestConfig(request).configure(donationTable)
+        donationTable = DonationTable(usernameToUserDonations(username))
+        RequestConfig(request).configure(donationTable)
+        orgToTotalDonations = calcDonationsPerOrg(username)
+        data = list(orgToTotalDonations.values())
+        labels = list(orgToTotalDonations.keys())
 
     context = {
         'form': form,
         'donationTable': donationTable,
+        'data': data,
+        'labels': labels,
     }
     return render(request, "microdollars/lookup.html", context)
 

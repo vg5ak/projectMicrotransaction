@@ -2,6 +2,7 @@ from django.db import models
 
 from django.contrib.auth.models import User
 
+
 class OrganizationModel(models.Model):
     organization_name = models.CharField(max_length=100)
     image = models.ImageField(upload_to="myimages",
@@ -28,16 +29,16 @@ class OrganizationModel(models.Model):
 
 
 class Donation(models.Model):
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null= True , related_name='usernames', default=None)
-    donateto = models.ForeignKey(OrganizationModel, on_delete=models.SET_NULL, null=True)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL,
+                             null=True, related_name='usernames', default=None)
+    donateto = models.ForeignKey(
+        OrganizationModel, on_delete=models.SET_NULL, null=True, verbose_name="Organization")
     amount = models.DecimalField(decimal_places=2, max_digits=10)
     comment = models.CharField(max_length=350, blank=True)
 
     def convertToTuple(self, info):
         obj = info.objects.all()
 
+
 class Search(models.Model):
     user_search = models.CharField(max_length=350, default=" ")
-    
-
-

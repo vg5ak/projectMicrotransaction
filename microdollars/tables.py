@@ -6,3 +6,4 @@ class DonationTable(tables.Table):
     class Meta:
         model = Donation
         attrs = {"class": "table"}
+        exclude = ("user", "id")

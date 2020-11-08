@@ -54,7 +54,7 @@ class SearchForm(forms.ModelForm):
             uid = User.objects.get(username=username)
         except ObjectDoesNotExist:
             raise ValidationError(
-                ('Username does not exist'), code='noUserError')
+                ('Username ' + username + ' does not exist'), code='noUserError')
         return username
 
 
