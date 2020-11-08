@@ -17,7 +17,7 @@
     <!-- Required meta tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>MicroDollars &ndash; About</title>
+    <title>MicroDollars &ndash; Profile</title>
 
     <!-- CSS only -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -56,7 +56,7 @@
               <a class="nav-link" href="/">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="/about">About<span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/about">About</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/lookup">User Lookup</a>
@@ -64,8 +64,8 @@
             <li class="nav-item">
               <a class="nav-link" href="/leaderboard">Leaderboard</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/profile">My Profile</a>
+            <li class="nav-item active">
+                <a class="nav-link" href="/profile">My Profile<span class="sr-only">(current)</span></a>
             </li>
           </ul>
         </div>
@@ -84,34 +84,19 @@
 
     <!-- START PAGE CONTENT -->
     <div id="maincontent" class="container">
-
-      <br>
-      <div class="row">
-        <div class="col-md-12 bg-light padding rounded">
-
-            <h5>MicroDollars is a service that enables quick and convenient micro-donations towards the non-profit organizations you love!</h5>
-            <h6>Through an intuitive UI and trusted PayPal payment system integration, users are able to easily donate towards causes they care about</h6>
-
-            <p>MicroDollars is created by the 2JV team, consisting of John Kim, Jami Park, Vinay Garimella, and Vasil Zhigilei<br>
-            The meaning of the team name 2JV comes from the first letters of the first names of the team members - 2 J's and 2 V's</p>
-
-            <h5>Find out more about our team members below<h5>
-
-            <h5>John Kim &ndash;
-            <a href="https://github.com/JohnKim08" target="_blank">GitHub</a></h5>
-
-            <h5>Jami Park &ndash;
-            <a href="https://github.com/jpjamipark" target="_blank">GitHub</a></h5>
-
-            <h5>Vinay Garimella &ndash;
-            <a href="https://github.com/vg5ak" target="_blank">GitHub</a></h5>
-
-            <h5>Vasil Zhigilei &ndash;
-            <a href="https://github.com/vasilzhigilei" target="_blank">GitHub</a></h5>
-
+        <br>
+        <div class="row">
+            <div class="col-md-8 bg-light padding rounded" style="margin-left: auto; margin-right: auto; padding: 2%;">
+                {{ message|safe }}
+                <form id="profileform" method="POST">
+                    {% csrf_token %}
+                    {{ form }}
+                    <br>
+                    <button type="submit" class="btn btn-success">Update Profile</button>
+                </form>
+            </div>
         </div>
-      </div>
-      <br>
+        <br>
     </div>
     <!-- STOP PAGE CONTENT -->
 
@@ -125,18 +110,5 @@
     </footer>
     <!-- STOP FOOTER -->
 
-    <script>
-      function changeOrgDropdown(div) {
-        var id = div.id; // get org name from clicked card id
-        var dropdown = document.getElementById("id_donateto") // get dropdown
-        var optionsLength = dropdown.options.length;
-        for (var i = 0; i < optionsLength; i++){
-          if (dropdown.options[i].text == id){
-            dropdown.options[i].selected = true;
-            break;
-          }
-        }
-      }
-    </script>
   </body>
 </html>
