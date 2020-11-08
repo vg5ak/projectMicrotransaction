@@ -58,7 +58,17 @@ def gamify(request):
         except ObjectDoesNotExist:
             return None
         return Donation.objects.filter(user=uid)
-
+    def exponential(user, donation):
+        if(donation == 0):
+            return (user, donation, 128578)
+        elif(donation < 10):
+            return (user, donation, 128513)
+        elif(donation < 100):
+            return (user, donation, 129297)
+        elif(donation < 1000):
+            return (user, donation, 129321)
+        else:
+            return (user, donation, 129332)
     def getAllDonations():
         userList = User.objects.all()
         sum = 0
@@ -67,7 +77,8 @@ def gamify(request):
             getUserDonations = usernameToUserDonations(user.username)
             for donation in getUserDonations:
                 sum += donation.amount
-            leaderboard.append((user.username, sum))
+                # user = user.split("  /")
+            leaderboard.append(exponential(user.username.capitalize(), sum))
             sum = 0
         return leaderboard
 
