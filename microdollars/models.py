@@ -35,6 +35,7 @@ class Donation(models.Model):
         OrganizationModel, on_delete=models.SET_NULL, null=True, verbose_name="Organization")
     amount = models.DecimalField(decimal_places=2, max_digits=10)
     comment = models.CharField(max_length=350, blank=True)
+    models.CharField(max_length=350, blank=True)
 
     def convertToTuple(self, info):
         obj = info.objects.all()

@@ -61,7 +61,11 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+<<<<<<< HEAD
     'django_tables2',
+=======
+
+>>>>>>> 86ff6ebb76a664088bf9c76c2c2c00732f75bfc0
 ]
 
 MIDDLEWARE = [
