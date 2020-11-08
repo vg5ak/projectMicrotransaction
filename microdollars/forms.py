@@ -51,7 +51,7 @@ class ProfileForm(forms.ModelForm):
         labels = {
             'username': gettext_lazy('Username'),
             'email': gettext_lazy('Email'),
-            'is_superuser': gettext_lazy('Superuser?'),
+            'is_superuser': gettext_lazy('Has superuser permissions?'),
             'first_name': gettext_lazy('First name'),
             'last_name': gettext_lazy('Last name'),
             'last_login': gettext_lazy('Last login'),
