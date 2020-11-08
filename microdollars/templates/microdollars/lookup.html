@@ -12,6 +12,7 @@
 {% endcomment %}
 
 {% load socialaccount %}
+{% load render_table from django_tables2 %}
 <html>
   <head>
     <!-- Required meta tags -->
@@ -77,23 +78,28 @@
         {% endif %}
       </div>
     </div>
-
-    <div class ="row">
+    <div id="maincontent" class="container">
+      <br>
+      <div class ="row">
+          <div class="col-md-12 bg-light padding rounded">
+              <form method="GET">
+                  {% comment %} {% csrf_token %} {% endcomment %}
+                  {{ form }}
+                  <br>
+                  <button type = "submit" class="btn btn-success">Search</button>
+              </form>
+          </div>
+      </div>
+      <br>
+      {% if donationTable %}
+      <div class ="row">
         <div class="col-md-12 bg-light padding rounded">
-            <form method="POST">
-                {% csrf_token %}
-                {{ form }}
-                <button type = "submit" class="btn btn-success">Search</button>
-            </form>
+           {% render_table donationTable %}
         </div>
+      </div>
+      <br>
+      {% endif %}
     </div>
-    
-    <div class = "col-sm">
-        {% for donation in donation_list_search %}    
-            <p> {{ donation.donateto }} </p>
-        {% endfor %}
-    </div>
-
     <!-- <p>{{ forms.user_email }} </p> -->
     
     
