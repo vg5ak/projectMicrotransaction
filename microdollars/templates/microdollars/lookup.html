@@ -155,19 +155,5 @@
       </div>
     </footer>
     <!-- STOP FOOTER -->
-
-    <script>
-      function changeOrgDropdown(div) {
-        var id = div.id; // get org name from clicked card id
-        var dropdown = document.getElementById("id_donateto") // get dropdown
-        var optionsLength = dropdown.options.length;
-        for (var i = 0; i < optionsLength; i++){
-          if (dropdown.options[i].text == id){
-            dropdown.options[i].selected = true;
-            break;
-          }
-        }
-      }
-    </script>
   </body>
 </html>
