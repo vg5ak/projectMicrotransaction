@@ -65,8 +65,8 @@
               <a class="nav-link active" href="/leaderboard">Leaderboard<span class="sr-only">(current)</span></a>
             </li>
             {% if user.is_authenticated %}
-            <li class="nav-item active">
-                <a class="nav-link" href="/profile">My Profile<span class="sr-only">(current)</span></a>
+            <li class="nav-item">
+                <a class="nav-link" href="/profile">My Profile</a>
             </li>
             {% endif %}
           </ul>
@@ -83,8 +83,11 @@
       </div>
     </div>
 
+    <!-- START PAGE CONTENT -->
     <div id="maincontent" class="container">
+        <br>
         <div class = "row">
+          <div class="col-md-12 bg-light padding rounded">
             <table class="table">
                 <thead>
                     <tr>
@@ -98,15 +101,18 @@
                   <tr>
                     <td style="font-family:helvetica">{{person.0}}</td>
                     <td style="font-family:helvetica">{{'$'}}{{person.1}}</td>
-                    <td style="">&#{{person.2}} </td>
+                    <td>&#{{person.2}} </td>
                   </tr>
                   {%endfor%}
                 </tbody>
-          </table>
+            </table>
+          </div>
       </div>
     </div>
-    
+    <!-- STOP PAGE CONTENT -->
+
     <!-- START FOOTER -->
+    <div class="spacer"></div>
     <footer class="font-small bg-darkblue text-darkerlight">
       <div class="footer-copyright text-center py-3">
         2020
@@ -114,19 +120,5 @@
       </div>
     </footer>
     <!-- STOP FOOTER -->
-
-    <script>
-      function changeOrgDropdown(div) {
-        var id = div.id; // get org name from clicked card id
-        var dropdown = document.getElementById("id_donateto") // get dropdown
-        var optionsLength = dropdown.options.length;
-        for (var i = 0; i < optionsLength; i++){
-          if (dropdown.options[i].text == id){
-            dropdown.options[i].selected = true;
-            break;
-          }
-        }
-      }
-    </script>
   </body>
 </html>
