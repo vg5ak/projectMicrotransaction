@@ -39,7 +39,7 @@ def lookup(request):
 
 
     def GraphY(username):
-        orginal_list = [] 
+
         Org_dict = { 1 : "Boys and Girls Association",  2: "Alcoholics Anonymous", 3: "World Wildlife Fund" , 
         4 : "The Salvation Army" ,  5: "Doctors Without Borders USA", 6: "American National Red Cross"}
         try:
@@ -51,13 +51,15 @@ def lookup(request):
         Pie_data = Donation.objects.filter(user = user_donations).values_list("donateto")
         Pie_data = list(Pie_data)
        
-        orginal_list.append(Pie_data)
+
         number_of_occurences = [x[0] for x in Pie_data]
+
         occurences_tied_to_organization = [Org_dict[i] for i in number_of_occurences]
+
         ##Keys were the names of the organization
         return list(Counter(occurences_tied_to_organization).keys())
     def GraphX(username):
-        orginal_list = [] 
+
  
 
         Org_dict = { 1 : "Boys and Girls Association",  2: "Alcoholics Anonymous", 3: "World Wildlife Fund" , 
@@ -71,9 +73,11 @@ def lookup(request):
         Pie_data = Donation.objects.filter(user = user_donations).values_list("donateto")
         Pie_data = list(Pie_data)
        
-        orginal_list.append(Pie_data)
+
         number_of_occurences  = [x[0] for x in Pie_data]
+        print(number_of_occurences)
         occurences_tied_to_organization = [Org_dict[i] for i in number_of_occurences]
+        print(occurences_tied_to_organization)
 
         ##Values were the number of donations that were counted with that group
         return list(Counter(occurences_tied_to_organization).values())
