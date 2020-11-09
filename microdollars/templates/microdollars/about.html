@@ -64,9 +64,11 @@
             <li class="nav-item">
               <a class="nav-link" href="/leaderboard">Leaderboard</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/profile">My Profile</a>
+            {% if user.is_authenticated %}
+            <li class="nav-item active">
+                <a class="nav-link" href="/profile">My Profile<span class="sr-only">(current)</span></a>
             </li>
+            {% endif %}
           </ul>
         </div>
       </div>
