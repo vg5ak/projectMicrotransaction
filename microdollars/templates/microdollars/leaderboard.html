@@ -85,28 +85,66 @@
 
     <!-- START PAGE CONTENT -->
     <div id="maincontent" class="container">
-        <br>
-        <div class = "row">
-          <div class="col-md-12 bg-light padding rounded">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th style="font-family:helvetica">Person</th>
-                        <th style="font-family:helvetica">Amount Donated</th>
-                        <th style="font-family:helvetica">Level</th>
-                    </tr>
-                </thead>
-                <tbody>
-                  {% for person in leaderboard %}
+      <br>
+      <div class = "row">
+        <div class="col-md-12 bg-light padding rounded">
+          <h2 style="text-align: center;">Donation Levels</h2>
+          <table class="table" style="width: 50%; margin: auto;">
+            <thead>
+              <tr>
+                <th style="font-family:helvetica; width:50%; text-align: right;">Donated at least...</th>  
+                <th style="font-family:helvetica; width:50%;">Level</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="font-family:helvetica; text-align: right;">$1000</td>
+                <td>&#129332</td>
+              </tr>
+              <tr>
+                <td style="font-family:helvetica; text-align: right;">$100</td>
+                <td>&#129321</td>
+              </tr>
+              <tr>
+                <td style="font-family:helvetica; text-align: right;">$10</td>
+                <td>&#129297</td>
+              </tr>
+              <tr>
+                <td style="font-family:helvetica; text-align: right;">$1</td>
+                <td>&#128513</td>
+              </tr>
+              <tr>
+                <td style="font-family:helvetica; text-align: right;">$0</td>
+                <td>&#128578</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <br>
+      <div class = "row">
+        <div class="col-md-12 bg-light padding rounded">
+          <table class="table">
+              <thead>
                   <tr>
-                    <td style="font-family:helvetica">{{person.0}}</td>
-                    <td style="font-family:helvetica">{{'$'}}{{person.1}}</td>
-                    <td>&#{{person.2}} </td>
+                      <th style="font-family:helvetica">Ranking</th>  
+                      <th style="font-family:helvetica">Person</th>
+                      <th style="font-family:helvetica">Amount Donated</th>
+                      <th style="font-family:helvetica">Level</th>
                   </tr>
-                  {%endfor%}
-                </tbody>
-            </table>
-          </div>
+              </thead>
+              <tbody>
+                {% for person in leaderboard %}
+                <tr>
+                  <td style="font-family:helvetica">{{person.0}}</td>
+                  <td style="font-family:helvetica">{{person.1}}</td>
+                  <td style="font-family:helvetica">{{'$'}}{{person.2}}</td>
+                  <td>&#{{person.3}} </td>
+                </tr>
+                {%endfor%}
+              </tbody>
+          </table>
+        </div>
       </div>
     </div>
     <!-- STOP PAGE CONTENT -->
