@@ -98,7 +98,7 @@ def gamify(request):
 
     def exponential(user, donation):
         if(donation == 0):
-            return (user, donation, 128578)
+            return (user, donation, 128578) 
         elif(donation < 10):
             return (user, donation, 128513)
         elif(donation < 100):
@@ -116,7 +116,6 @@ def gamify(request):
             getUserDonations = usernameToUserDonations(user.username)
             for donation in getUserDonations:
                 sum += donation.amount
-                # user = user.split("  /")
             leaderboard.append(exponential(user.username.capitalize(), sum))
             sum = 0
         return leaderboard
@@ -124,8 +123,16 @@ def gamify(request):
     def sortThis():
         return sorted(getAllDonations(), key=lambda x: x[1], reverse=True)
 
+    def numberList(rankingslist):
+        finallist = []
+        i = 1
+        for rankings in rankingslist:
+            finallist.append((i, rankings[0], rankings[1], rankings[2]))
+            i+=1
+        return finallist
+
     context = {
-        'leaderboard': sortThis(),
+        'leaderboard': numberList(sortThis()),
     }
 
     return render(request, "microdollars/leaderboard.html", context)
