@@ -37,7 +37,7 @@
         <a href="#" class="h1 navbar-brand nomargin">MicroDollars</a>
         {% if user.is_authenticated %}
           <!-- Sign out button -->
-          <a class="btn btn-outline-danger pull-right" role="button" href="accounts/logout/">Logout</a>
+          <a class="btn btn-outline-danger pull-right" role="button" href="/accounts/logout/">Logout</a>
         {% else %}
           <!-- Log in/Sign up button -->
           <a class="btn btn-outline-success pull-right" role="button" href="{% provider_login_url 'google' %}">Log in/Sign up with Google</a>
