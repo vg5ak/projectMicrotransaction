@@ -30,6 +30,7 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATIC_ROOT = os.path.join(BASE_DIR, 'microdollars/static')
 MEDIA_URL = '/media/'
 
 # Quick-start development settings - unsuitable for production
@@ -39,9 +40,9 @@ MEDIA_URL = '/media/'
 SECRET_KEY = 'eexvvh6p_h6guk2k#5q*ob_(gljpu1#o^x@b9%+skj&-e6kb6f'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'https://cs3240-2jv.herokuapp.com/']
 
 
 # Application definition
