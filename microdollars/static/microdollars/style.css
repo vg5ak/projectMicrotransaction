@@ -112,3 +112,8 @@ footer {
     margin-bottom: 10px;
     width: 100%;
 }
+
+.leaderboardtable {
+    font-family: helvetica;
+    text-align: left;
+}
