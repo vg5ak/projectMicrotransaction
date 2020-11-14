@@ -28,6 +28,10 @@ def index(request):
             request, "Successfully completed transaction!")
         return redirect(reverse('index'))
 
+    if request.user.is_anonymous:
+        messages.warning(
+            request, "You're not logged in, so your donation will be anonymous. It won't show up on leaderboards, or on any profile!")
+
     context = {
         'form': form,
         'donation_list': Donation.objects,
