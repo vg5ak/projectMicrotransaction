@@ -1,8 +1,9 @@
+from django.core.exceptions import ValidationError
 from django.test import TestCase
 
 # Create your tests here.
-from .models import OrganizationModel, Donation
-from .forms import DonationForm
+from .models import OrganizationModel, Donation, Search
+from .forms import DonationForm, SearchForm
 from http import HTTPStatus
 from django.contrib.auth.models import User
 from django.db import models
@@ -132,6 +133,97 @@ class DonationFormAndViewTest(TestCase):
             "/", data={"user": user.id, "donateto": org.id, "amount": 50, "comment": "Here's 50 dollars"}
         )
         self.assertEqual(Donation.objects.count(), 1)
+
+class UserLookupTest(TestCase):
+    def test_get(self):
+        response = self.client.get("/lookup")
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+
+
+    def test_InputDoesNotExist(self):
+
+        org = OrganizationModel(
+            organization_name="Org 1", about_me="I'm Org 1!")
+        org.save()
+
+        user = User.objects.create_user(
+            username='jacob', email='jacob@…', password='top_secret')
+        user.save()
+
+        formData = {
+            'donateto': org,
+            'amount': 55,
+            'comment': "55 bucks for Org 1, enjoy",
+        }
+        form = DonationForm(data=formData)
+        form.user = user
+        form.save()
+
+        
+        #search_look = Search("jacob")
+        #search_look = Search(user_search= "jacob")
+        formData = {
+            'user_search': "jacob",
+        }
+        
+        self.assertTrue(SearchForm(data=formData).is_valid())
+    def test_InputDoesNotExist(self):
+
+        org = OrganizationModel(
+            organization_name="Org 1", about_me="I'm Org 1!")
+        org.save()
+
+        user = User.objects.create_user(
+            username='jacob', email='jacob@…', password='top_secret')
+        user.save()
+
+        formData = {
+            'donateto': org,
+            'amount': 55,
+            'comment': "55 bucks for Org 1, enjoy",
+        }
+        form_donation = DonationForm(data=formData)
+        form_donation.user = user
+        form_donation.save()
+       
+        formData = {
+            'user_search': "notjacob",
+        }
+        form_search = SearchForm(data=formData)
+        
+       
+        self.assertEquals(
+            form_search.errors["user_search"], ['Username ' + formData['user_search'] + ' does not exist'])
+     
+    def test_forCapital(self):
+
+        org = OrganizationModel(
+            organization_name="Org 1", about_me="I'm Org 1!")
+        org.save()
+
+        user = User.objects.create_user(
+            username='jacob', email='jacob@…', password='top_secret')
+        user.save()
+
+        formData = {
+            'donateto': org,
+            'amount': 55,
+            'comment': "55 bucks for Org 1, enjoy",
+        }
+        form_donation = DonationForm(data=formData)
+        form_donation.user = user
+        form_donation.save()
+
+        formData = {
+            'user_search': "Jacob",
+        }
+        form_search = SearchForm(data=formData)
+        
+        self.assertEquals(
+            form_search.errors["user_search"], ['Username ' + formData['user_search'] + ' does not exist'])
+
+        
+
 
 class LeaderboardTest(TestCase):
     def create_org(self):
@@ -275,3 +367,4 @@ class LeaderboardTest(TestCase):
         listOfTestDonations2.append((2, user3.username.capitalize(), float(3000), 129332))
         listOfTestDonations2.append((3, user.username.capitalize(),  float(2),    128513))
         self.assertEquals(listOfDonations, listOfTestDonations2)
+
