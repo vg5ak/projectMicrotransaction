@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
 import datetime
+from django.test import Client
 
 class OrganizationTest(TestCase):
     # Donation.objects.create()
@@ -406,7 +407,7 @@ class ProfileUpdateTest(TestCase):
 
     def test_validProfileUpdate(self):
         user = User.objects.create_user(
-            username='jacob', email='jacob@…', password='top_secret', date_joined=timezone.now())
+            username='jacob', email='jacob@…', password='top_secret')
         user.save()
 
         formData = {
@@ -415,6 +416,25 @@ class ProfileUpdateTest(TestCase):
             'last_name': 'ALastName',
             'date_joined': timezone.now(),
         }
-        
+
         form = ProfileForm(data=formData)
         self.assertTrue(form.is_valid())
+
+    def test_submitForm(self):
+        user = User.objects.create_user(
+            username='jacob', email='jacob@…', password='top_secret')
+        user.set_password('top_secret')
+        user.save()
+
+        formData = {
+            'username': 'Jacob',
+            'first_name': 'Jacob',
+            'last_name': 'ALastName',
+            'date_joined': timezone.now(),
+        }
+
+        client = Client() 
+        client.login(username=user.username, password='top_secret')
+        response = client.post("/profile", data=formData)
+        
+        self.assertEquals(User.objects.get(username='Jacob').username, 'Jacob')
