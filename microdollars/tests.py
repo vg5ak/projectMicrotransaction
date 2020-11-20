@@ -3,10 +3,12 @@ from django.test import TestCase
 
 # Create your tests here.
 from .models import OrganizationModel, Donation, Search
-from .forms import DonationForm, SearchForm
+from .forms import DonationForm, SearchForm, ProfileForm
 from http import HTTPStatus
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils import timezone
+import datetime
 
 class OrganizationTest(TestCase):
     # Donation.objects.create()
@@ -368,3 +370,51 @@ class LeaderboardTest(TestCase):
         listOfTestDonations2.append((3, user.username.capitalize(),  float(2),    128513))
         self.assertEquals(listOfDonations, listOfTestDonations2)
 
+
+class ProfileUpdateTest(TestCase):
+    def test_invalidUsernameSpace(self):
+        user = User.objects.create_user(
+            username='jacob', email='jacob@…', password='top_secret')
+        user.save()
+
+        formData = {
+            'username': 'A Space',
+            'first_name': 'Jacob',
+            'last_name': 'ALastName',
+        }
+        form = ProfileForm(data=formData)
+        
+        self.assertFalse(form.is_valid())
+        self.assertEquals(
+            form.errors["username"], ['Enter a valid username. This value may contain only letters, numbers, and @/./+/-/_ characters.'])
+    
+    def test_invalidUsernameChar(self):
+        user = User.objects.create_user(
+            username='jacob', email='jacob@…', password='top_secret')
+        user.save()
+
+        formData = {
+            'username': 'Jacob!!!',
+            'first_name': 'Jacob',
+            'last_name': 'ALastName',
+        }
+        form = ProfileForm(data=formData)
+        
+        self.assertFalse(form.is_valid())
+        self.assertEquals(
+            form.errors["username"], ['Enter a valid username. This value may contain only letters, numbers, and @/./+/-/_ characters.'])
+
+    def test_validProfileUpdate(self):
+        user = User.objects.create_user(
+            username='jacob', email='jacob@…', password='top_secret', date_joined=timezone.now())
+        user.save()
+
+        formData = {
+            'username': 'Jacob',
+            'first_name': 'Jacob',
+            'last_name': 'ALastName',
+            'date_joined': timezone.now(),
+        }
+        
+        form = ProfileForm(data=formData)
+        self.assertTrue(form.is_valid())
