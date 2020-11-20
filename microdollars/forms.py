@@ -39,11 +39,10 @@ class DonationForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('username', 'email', 'is_superuser', 'first_name', 'last_name', 'last_login', 'date_joined')
+        fields = ('username', 'email', 'first_name', 'last_name', 'last_login', 'date_joined')
         widgets = {
             'username': forms.TextInput(attrs={'class': 'form-control forminput'}), 
             'email': forms.TextInput(attrs={'class': 'form-control forminput', 'readonly': 'readonly'}), 
-            'is_superuser': forms.CheckboxInput(attrs={'class': 'form-control forminput', 'disabled': 'disabled', 'style': 'width: 10%;'}), 
             'first_name': forms.TextInput(attrs={'class': 'form-control forminput'}), 
             'last_name': forms.TextInput(attrs={'class': 'form-control forminput'}), 
             'last_login': forms.TextInput(attrs={'class': 'form-control forminput', 'readonly': 'readonly'}), 
@@ -52,7 +51,6 @@ class ProfileForm(forms.ModelForm):
         labels = {
             'username': gettext_lazy('Username'),
             'email': gettext_lazy('Email'),
-            'is_superuser': gettext_lazy('Has superuser permissions?'),
             'first_name': gettext_lazy('First name'),
             'last_name': gettext_lazy('Last name'),
             'last_login': gettext_lazy('Last login'),
@@ -61,7 +59,6 @@ class ProfileForm(forms.ModelForm):
         help_texts = {
             'username': None,
             'email': None,
-            'is_superuser': None,
         }
 
 
