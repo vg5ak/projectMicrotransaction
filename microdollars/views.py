@@ -98,7 +98,7 @@ def gamify(request):
 
     def exponential(user, donation):
         if(donation == 0):
-            return (user, donation, 128578) 
+            return (user, donation, 128578)
         elif(donation < 10):
             return (user, donation, 128513)
         elif(donation < 100):
@@ -106,7 +106,7 @@ def gamify(request):
         elif(donation < 1000):
             return (user, donation, 129321)
         else:
-            return (user, donation, 129332)
+            return (user, donation, 128081)
 
     def getAllDonations():
         userList = User.objects.all()
@@ -128,7 +128,7 @@ def gamify(request):
         i = 1
         for rankings in rankingslist:
             finallist.append((i, rankings[0], rankings[1], rankings[2]))
-            i+=1
+            i += 1
         return finallist
 
     context = {
