@@ -118,6 +118,7 @@ footer {
 .levelsDescription-table {
     table-layout: fixed;
     width: 50%;
+    margin: auto;
 }
 
 .levelsDescription-amountcolumn {

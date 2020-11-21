@@ -40,7 +40,7 @@
         <a href="#" class="h1 navbar-brand nomargin">MicroDollars</a>
         {% if user.is_authenticated %}
           <!-- Sign out button -->
-          <a class="btn btn-outline-danger pull-right" role="button" href="accounts/logout/">Logout</a>
+          <a class="btn btn-outline-danger pull-right" role="button" href="/accounts/logout/">Logout</a>
         {% else %}
           <!-- Log in/Sign up button -->
           <a class="btn btn-outline-success pull-right" role="button" href="{% provider_login_url 'google' %}">Log in/Sign up with Google</a>
@@ -112,11 +112,18 @@
         <div class="col-md-12 bg-light padding rounded">
           <div class="row justify-content-center">
             <div class="col-sm-12 col-md-8">
+            {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                        <div {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{message}}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
               {{ message|safe }}
               <form id="donationform" method="POST">
-                <div id="empty_error" class="hidden error">Amount can't be empty!</div>
-                <div id="amount_error" class="hidden error">Amount must be positive!</div>
-                <div id="decimal_error" class="hidden error">Too many decimals!</div>
+                <div id="empty_error" class="hidden alert alert-danger">Amount can't be empty!</div>
+                <div id="amount_error" class="hidden alert alert-danger">Amount must be positive!</div>
+                <div id="decimal_error" class="hidden alert alert-danger">Too many decimals! Please limit to 1 cent increments.</div>
                 {% csrf_token %}
                 {{ form }}
               </form>

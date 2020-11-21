@@ -37,7 +37,7 @@
         <a href="#" class="h1 navbar-brand nomargin">MicroDollars</a>
         {% if user.is_authenticated %}
           <!-- Sign out button -->
-          <a class="btn btn-outline-danger pull-right" role="button" href="accounts/logout/">Logout</a>
+          <a class="btn btn-outline-danger pull-right" role="button" href="/accounts/logout/">Logout</a>
         {% else %}
           <!-- Log in/Sign up button -->
           <a class="btn btn-outline-success pull-right" role="button" href="{% provider_login_url 'google' %}">Log in/Sign up with Google</a>
@@ -88,8 +88,8 @@
       <br>
       <div class = "row">
         <div class="col-md-12 bg-light padding rounded">
-          <h2 style="text-align: center;">Donation Levels</h2>
-          <table class="table levelsDescription-table" style="width: 50%; margin: auto;">
+          <h2 class="text-center">Donation Levels</h2>
+          <table class="table levelsDescription-table">
             <thead>
               <tr>
                 <th class="levelsDescription-amountcolumn align-middle">Donated at least...</th>  
@@ -124,7 +124,7 @@
       <br>
       <div class="row">
         <div class="col-md-12 bg-light padding rounded">
-          <table class="table">
+          <table class="table leaderboardtable">
               <thead>
                   <tr>
                       <th>Ranking</th>  
@@ -146,6 +146,7 @@
           </table>
         </div>
       </div>
+      <br>
     </div>
     <br>
     <!-- STOP PAGE CONTENT -->

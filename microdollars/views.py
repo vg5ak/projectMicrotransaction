@@ -7,8 +7,11 @@ from microdollars.forms import ProfileForm, DonationForm, SearchForm, Search
 from django.core.exceptions import ObjectDoesNotExist
 from django_tables2.config import RequestConfig
 from collections import Counter
-# Create your views here.
 from django.contrib.auth.models import User
+from django.shortcuts import redirect
+from django.urls import reverse
+from django.contrib import messages
+# Create your views here.
 
 
 def index(request):
@@ -21,12 +24,18 @@ def index(request):
         else:
             tempForm.user = None
         tempForm.save()
-        message = '<div class="alert alert-success" role="alert">Successfully updated profile!</div>'
+        messages.success(
+            request, "Successfully completed transaction!")
+        return redirect(reverse('index'))
+
+    if request.user.is_anonymous:
+        messages.warning(
+            request, "You're not logged in, so your donation will be anonymous. It won't show up on leaderboards, or on any profile!")
+
     context = {
         'form': form,
         'donation_list': Donation.objects,
         'organizations': OrganizationModel.objects.all(),
-        'message': message,
     }
     return render(request, "microdollars/index.html", context)
 
