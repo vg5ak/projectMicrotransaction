@@ -115,7 +115,7 @@ def gamify(request):
         elif(donation < 1000):
             return (user, donation, 129321)
         else:
-            return (user, donation, 129332)
+            return (user, donation, 128081)
 
     def getAllDonations():
         userList = User.objects.all()
