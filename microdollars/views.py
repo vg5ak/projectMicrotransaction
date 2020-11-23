@@ -11,6 +11,8 @@ from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.contrib import messages
+from collections import Counter
+import statistics
 # Create your views here.
 
 
@@ -67,7 +69,12 @@ def lookup(request):
     donationTable = None
     data = None
     labels = None
-
+    average = None
+    mode = None
+    median = None
+    username_graph = None
+    bar_data =  None
+    bar_labels = None 
     def calcDonationsPerOrg(username):
         userDonations = usernameToUserDonations(username)
         orgToTotalDonations = dict()
@@ -77,20 +84,61 @@ def lookup(request):
                 orgName, 0) + donation.amount
         return orgToTotalDonations
 
+    def calcAvgDonationAmount(username):
+        userDonations = usernameToUserDonations(username)
+        total_donation = 0
+        for donation in userDonations:
+            total_donation += donation.amount
+        return round(total_donation/userDonations.count())
+
+    def calcModeAmount(username):
+        userDonations = usernameToUserDonations(username)
+        donations = []
+        for donation in userDonations:
+            donations.append(donation.amount)
+        
+        return max(set(donations), key=donations.count)
+
+    def calcMedianAmount(username):
+        userDonations = usernameToUserDonations(username)
+        donations = [] 
+        for donation in userDonations:
+            donations.append(donation.amount)
+        return statistics.median(donations)
     if form.is_valid():
         username = form.cleaned_data['user_search']
+        username_graph = form.cleaned_data['user_search']
         donationTable = DonationTable(usernameToUserDonations(username))
         RequestConfig(request).configure(donationTable)
         orgToTotalDonations = calcDonationsPerOrg(username)
+        
         data = [float(val)
                 for val in list(orgToTotalDonations.values())]
         labels = list(orgToTotalDonations.keys())
+
+        average = calcAvgDonationAmount(username)
+
+        mode = calcModeAmount(username)
+
+        median = calcMedianAmount(username)
+        bar_labels = ["average", "mode", "median"]
+        bar_data = []
+        
+        bar_data.append(average)
+        bar_data.append(mode)
+        bar_data.append(median)
 
     context = {
         'form': form,
         'donationTable': donationTable,
         'data': data,
         'labels': labels,
+        'average': average,
+        'mode': mode,
+        'median': median,
+        'username_graph' : username_graph,
+        'bar_labels' : bar_labels,
+        'bar_data' : bar_data,
     }
     return render(request, "microdollars/lookup.html", context)
 
