@@ -52,11 +52,13 @@ Navigation Bar
 Home
 -----
 ![Home Page](./media/readmeimages/Home.png)
-	This page is the main page where all users who sign in will automatically be sent to. The main content of this page is the cards that contain the organizations that you can donate to as well as information regarding the information. If you click on the organization card it will autofill the organization that will receive the donation in the donation form.
-	Below the picture cards are the donation form itself. The donation form consists of a drop-down menu where one can select an organization to donate to. A field to input the amount of money they want to donate to. Lastly, a comment that can be attached to the donation. In order for any payment to be made once a user fills out the organization, amount, and an optional comment, the Paypal button must be clicked. From there the user must supply their PayPal account information. Once Pay now is clicked the donation will be processed and visible in the admin space.
+This page is the main page where all users who sign in will automatically be sent to. The main content of this page is the cards that contain the organizations that you can donate to as well as information regarding the information. If you click on the organization card it will autofill the organization that will receive the donation in the donation form.
+
+Below the picture cards are the donation form itself. The donation form consists of a drop-down menu where one can select an organization to donate to. A field to input the amount of money they want to donate to. Lastly, a comment that can be attached to the donation. In order for any payment to be made once a user fills out the organization, amount, and an optional comment, the Paypal button must be clicked. From there the user must supply their PayPal account information. Once Pay now is clicked the donation will be processed and visible in the admin space.
 
 About
 -----
+
 ![About Page](./media/readmeimages/About.png)
 This page contains an overview of the creation of the project and the objective of the site itself. It contains the information regarding the name of the group and links to Github repositories of all the members who contributed to its creation.
 
@@ -65,7 +67,7 @@ User Lookup
 -----
 ![User Lookup](./media/readmeimages/Lookup.png)
 
-	This page contains a field where a user can input the name of another user. Once the submit button is clicked the user is able to see where and how many donations are made to. Below that there is a Pie graph showing the amount of money funded to different organizations.
+This page contains a field where a user can input the name of another user. Once the submit button is clicked the user is able to see where and how many donations are made to. Below that there is a Pie graph showing the amount of money funded to different organizations.
 
 
 Leaderboard
@@ -73,6 +75,7 @@ Leaderboard
 ![Home Page](./media/readmeimages/Leaderboard.png)
 
 This page represents the gamification section of the website and allows users to see which user has donated the most amount of money. The table states the user’s name, amount donated and an emoji that represents how high up on the leader board they are.
+
 My Profile
 ----------
 ![Home Page](./media/readmeimages/Profile.png)
