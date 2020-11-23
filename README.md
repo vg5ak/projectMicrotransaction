@@ -72,7 +72,7 @@ Leaderboard
 -----
 ![Home Page](./media/readmeimages/Leaderboard.png)
 
-	This page represents the gamification section of the website and allows users to see which user has donated the most amount of money. The table states the user’s name, amount donated and an emoji that represents how high up on the leader board they are.
+This page represents the gamification section of the website and allows users to see which user has donated the most amount of money. The table states the user’s name, amount donated and an emoji that represents how high up on the leader board they are.
 My Profile
 ----------
 ![Home Page](./media/readmeimages/Profile.png)
