@@ -81,7 +81,7 @@
     <div class="navbar navbar-expand-md bg-light">
       <div class="container">
         {% if user.is_authenticated %}
-        <p id="username" class="h1 navbar-brand nomargin">Welcome, {{ user.username }}!</p>
+        <p id="username" class="h1 navbar-brand nomargin">Welcome, {{ user.username }}! {{ banner.text|safe }}</p>
         {% else %}
         <p id="username" class="h1 navbar-brand nomargin">Not Logged In</p>
         {% endif %}
