@@ -127,7 +127,7 @@ def lookup(request):
 
     def calcAvgDonationAmount(userDonations):
         print(userDonations)
-        return statistics.mean(userDonations)
+        return round(statistics.mean(userDonations), 2)
 
     def calcModeAmount(userDonations):
         return max(userDonations, key=userDonations.count)
