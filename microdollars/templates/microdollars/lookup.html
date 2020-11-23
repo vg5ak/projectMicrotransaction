@@ -109,11 +109,22 @@
         </div>
       </div>
       {% elif donationTable %}
-      <div class ="row">
-        <div class="col-md-12 bg-light padding rounded">
-          {% render_table donationTable %}
+        <div class ="row">
+          <div class="col-md-12 bg-light padding rounded">
+            {% render_table donationTable %}
+          </div>
         </div>
+        <br>
+      {% endif %}
+      {% if average and mode and median %}
+      <div class = "row">
+        <div class="col-md-12 bg-light padding rounded">
+          <h1>Statistics for {{ username }}</h1>
+        <p><b>Average donation: $ {{ average }}</b></p>
+        <p><b> Mode: $ {{ mode }}</b> </p>
+        <p><b> Median: $ {{ median }}</b></p>
       </div>
+      </div> 
       {% endif %}
 
       <br>
@@ -121,7 +132,8 @@
       <div class ="row">
         <div class="col-md-12 bg-light padding rounded d-flex justify-content-center">
           <div class="col-md-6">
-            <h2>Donation Amounts by Organization for {{user.username}}</h2>
+           
+            <h2>Donation Amounts by Organization for {{ username }}</h2>
             <div id="container">
                 <canvas id="pie-chart"></canvas>
             </div>
@@ -130,7 +142,7 @@
                 type: 'pie',
                 data: {
                   datasets: [{
-                    data: {{ data|safe }},
+                    data:  {{ data|safe }},
                     backgroundColor: [
                       '#ff0000', '#0000ff', '#ff0080', '#73ffff', '#5c26ff', '#002db3', '#ffff26', '#4cff4c', '#ff00ff'
                     ],
@@ -139,8 +151,19 @@
                   labels: {{ labels|safe }}
                 },
                 options: {
-                  responsive: true
+                  tooltips: {
+            callbacks: {
+                label: function(tooltipItems, data) {
+                    return data.labels[tooltipItems.index] + 
+                    " $" + 
+                    data.datasets[tooltipItems.datasetIndex].data[tooltipItems.index] +
+                    ' ';
                 }
+            }
+        }
+                  
+                }
+             
               };
           
               window.onload = function() {
@@ -152,10 +175,11 @@
         </div>
       </div>
       {% endif %}
+      
       <br>
     </div>
     <!-- STOP PAGE CONTENT -->
-
+    
     <!-- START FOOTER -->
     <div class="spacer"></div>
     <footer class="font-small bg-darkblue text-darkerlight">
