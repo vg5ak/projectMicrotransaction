@@ -73,8 +73,6 @@ def lookup(request):
     mode = None
     median = None
     username_graph = None
-    bar_data =  None
-    bar_labels = None 
     def calcDonationsPerOrg(username):
         userDonations = usernameToUserDonations(username)
         orgToTotalDonations = dict()
@@ -121,12 +119,7 @@ def lookup(request):
         mode = calcModeAmount(username)
 
         median = calcMedianAmount(username)
-        bar_labels = ["average", "mode", "median"]
-        bar_data = []
         
-        bar_data.append(average)
-        bar_data.append(mode)
-        bar_data.append(median)
 
     context = {
         'form': form,
@@ -137,8 +130,6 @@ def lookup(request):
         'mode': mode,
         'median': median,
         'username_graph' : username_graph,
-        'bar_labels' : bar_labels,
-        'bar_data' : bar_data,
     }
     return render(request, "microdollars/lookup.html", context)
 
