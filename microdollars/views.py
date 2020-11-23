@@ -11,40 +11,11 @@ from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.contrib import messages
+from collections import Counter
+import statistics
 # Create your views here.
 
-"""
-def exponential(user, donation):
-        if(donation == 0):
-            return (user, donation, 128578)
-        elif(donation < 10):
-            return (user, donation, 128513)
-        elif(donation < 100):
-            return (user, donation, 129297)
-        elif(donation < 1000):
-            return (user, donation, 129321)
-        else:
-            return (user, donation, 128081)
 
-    def getAllDonations():
-        userList = User.objects.all()
-        sum = 0
-        leaderboard = []
-        for user in userList:
-            getUserDonations = usernameToUserDonations(user.username)
-            for donation in getUserDonations:
-                sum += donation.amount
-            leaderboard.append(exponential(user.username.capitalize(), sum))
-            sum = 0
-        return leaderboard
-
-    def usernameToUserDonations(username):
-        try:
-            uid = User.objects.get(username=username)
-        except ObjectDoesNotExist:
-            return None
-        return Donation.objects.filter(user=uid)
-"""
 def index(request):
     form = DonationForm(request.POST or None)
     if form.is_valid():
@@ -76,22 +47,31 @@ def index(request):
         if sum == 0:
             emoji = 128578
             tolevelup = 10
-            text = "Your level is &#" + str(emoji) + ", donate $" + str(tolevelup) + " more to level up!"
+            text = "Your level is &#" + \
+                str(emoji) + ", donate $" + \
+                str(tolevelup) + " more to level up!"
         elif sum < 10:
             emoji = 128513
             tolevelup = 10 - sum
-            text = "Your level is &#" + str(emoji) + ", donate $" + str(tolevelup) + " more to level up!"
+            text = "Your level is &#" + \
+                str(emoji) + ", donate $" + \
+                str(tolevelup) + " more to level up!"
         elif sum < 100:
             emoji = 129297
             tolevelup = 100 - sum
-            text = "Your level is &#" + str(emoji) + ", donate $" + str(tolevelup) + " more to level up!"
+            text = "Your level is &#" + \
+                str(emoji) + ", donate $" + \
+                str(tolevelup) + " more to level up!"
         elif sum < 1000:
             emoji = 129321
             tolevelup = 1000 - sum
-            text = "Your level is &#" + str(emoji) + ", donate $" + str(tolevelup) + " more to level up!"
+            text = "Your level is &#" + \
+                str(emoji) + ", donate $" + \
+                str(tolevelup) + " more to level up!"
         else:
             emoji = 128081
-            text = "Your level is &#" + str(emoji) + ", you are at the max level!"
+            text = "Your level is &#" + \
+                str(emoji) + ", you are at the max level!"
         banner['text'] = text
     context = {
         'form': form,
@@ -120,6 +100,7 @@ def usernameToUserDonations(username):
         uid = User.objects.get(username=username)
     except ObjectDoesNotExist:
         return None
+    print("test")
     return Donation.objects.filter(user=uid)
 
 
@@ -129,6 +110,11 @@ def lookup(request):
     donationTable = None
     data = None
     labels = None
+    donationsEmpty = False
+    average = None
+    mode = None
+    median = None
+    username = None
 
     def calcDonationsPerOrg(username):
         userDonations = usernameToUserDonations(username)
@@ -139,20 +125,43 @@ def lookup(request):
                 orgName, 0) + donation.amount
         return orgToTotalDonations
 
+    def calcAvgDonationAmount(userDonations):
+        print(userDonations)
+        return statistics.mean(userDonations)
+
+    def calcModeAmount(userDonations):
+        return max(userDonations, key=userDonations.count)
+
+    def calcMedianAmount(userDonations):
+        return statistics.median(userDonations)
+
     if form.is_valid():
         username = form.cleaned_data['user_search']
-        donationTable = DonationTable(usernameToUserDonations(username))
+        donations = usernameToUserDonations(username)
+        donationTable = DonationTable(donations)
+        donationsEmpty = (donations.count() == 0)
         RequestConfig(request).configure(donationTable)
-        orgToTotalDonations = calcDonationsPerOrg(username)
-        data = [float(val)
-                for val in list(orgToTotalDonations.values())]
-        labels = list(orgToTotalDonations.keys())
 
+        if not donationsEmpty:
+            # calc total donations
+            orgToTotalDonations = calcDonationsPerOrg(username)
+            data = [float(val)
+                    for val in list(orgToTotalDonations.values())]
+            labels = list(orgToTotalDonations.keys())
+            donationsList = [d['amount'] for d in donations.values()]
+            average = calcAvgDonationAmount(donationsList)
+            mode = calcModeAmount(donationsList)
+            median = calcMedianAmount(donationsList)
     context = {
         'form': form,
+        'donationsEmpty':  donationsEmpty,
         'donationTable': donationTable,
         'data': data,
         'labels': labels,
+        'average': average,
+        'mode': mode,
+        'median': median,
+        'username': username,
     }
     return render(request, "microdollars/lookup.html", context)
 
@@ -187,7 +196,7 @@ def gamify(request):
             getUserDonations = usernameToUserDonations(user.username)
             for donation in getUserDonations:
                 sum += donation.amount
-            leaderboard.append(exponential(user.username.capitalize(), sum))
+            leaderboard.append(exponential(user.username, sum))
             sum = 0
         return leaderboard
 
