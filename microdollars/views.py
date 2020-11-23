@@ -13,10 +13,40 @@ from django.urls import reverse
 from django.contrib import messages
 # Create your views here.
 
+"""
+def exponential(user, donation):
+        if(donation == 0):
+            return (user, donation, 128578)
+        elif(donation < 10):
+            return (user, donation, 128513)
+        elif(donation < 100):
+            return (user, donation, 129297)
+        elif(donation < 1000):
+            return (user, donation, 129321)
+        else:
+            return (user, donation, 128081)
 
+    def getAllDonations():
+        userList = User.objects.all()
+        sum = 0
+        leaderboard = []
+        for user in userList:
+            getUserDonations = usernameToUserDonations(user.username)
+            for donation in getUserDonations:
+                sum += donation.amount
+            leaderboard.append(exponential(user.username.capitalize(), sum))
+            sum = 0
+        return leaderboard
+
+    def usernameToUserDonations(username):
+        try:
+            uid = User.objects.get(username=username)
+        except ObjectDoesNotExist:
+            return None
+        return Donation.objects.filter(user=uid)
+"""
 def index(request):
     form = DonationForm(request.POST or None)
-    message = ""
     if form.is_valid():
         tempForm = form.save(commit=False)
         if request.user and not request.user.is_anonymous:
@@ -32,10 +62,42 @@ def index(request):
         messages.warning(
             request, "You're not logged in, so your donation will be anonymous. It won't show up on leaderboards, or on any profile!")
 
+    # generate string for top banner display
+    banner = {'text': ""}
+    if request.user.is_authenticated:
+        # get total donation amount
+        sum = 0
+        try:
+            for donation in Donation.objects.filter(user=request.user.id):
+                sum += donation.amount
+        except:
+            pass
+        text = ""
+        if sum == 0:
+            emoji = 128578
+            tolevelup = 10
+            text = "Your level is &#" + str(emoji) + ", donate $" + str(tolevelup) + " more to level up!"
+        elif sum < 10:
+            emoji = 128513
+            tolevelup = 10 - sum
+            text = "Your level is &#" + str(emoji) + ", donate $" + str(tolevelup) + " more to level up!"
+        elif sum < 100:
+            emoji = 129297
+            tolevelup = 100 - sum
+            text = "Your level is &#" + str(emoji) + ", donate $" + str(tolevelup) + " more to level up!"
+        elif sum < 1000:
+            emoji = 129321
+            tolevelup = 1000 - sum
+            text = "Your level is &#" + str(emoji) + ", donate $" + str(tolevelup) + " more to level up!"
+        else:
+            emoji = 128081
+            text = "Your level is &#" + str(emoji) + ", you are at the max level!"
+        banner['text'] = text
     context = {
         'form': form,
         'donation_list': Donation.objects,
         'organizations': OrganizationModel.objects.all(),
+        'banner': banner,
     }
     return render(request, "microdollars/index.html", context)
 
