@@ -33,6 +33,9 @@ Will run python manage.py makemigrations, migrate, and runserver in one command
 Install the requirements
     pip install -r requirements.txt
 
+
+
+
 The different features of the app
 ---------------------------------
 
@@ -56,6 +59,15 @@ This page is the main page where all users who sign in will automatically be sen
 
 Below the picture cards are the donation form itself. The donation form consists of a drop-down menu where one can select an organization to donate to. A field to input the amount of money they want to donate to. Lastly, a comment that can be attached to the donation. In order for any payment to be made once a user fills out the organization, amount, and an optional comment, the Paypal button must be clicked. From there the user must supply their PayPal account information. Once Pay now is clicked the donation will be processed and visible in the admin space.
 
+Fake PayPal Info
+-------------
+    email : sb-vikk23602810@personal.example.com
+    Password: tZ+bm3Jn
+    Email: sb-etutn3569238@personal.example.com
+    Password: =G$i%i(9
+    Email: sb-tprix3572050@business.example.com
+    Password: "7>a_UW0
+
 About
 -----
 
@@ -66,6 +78,8 @@ This page contains an overview of the creation of the project and the objective 
 User Lookup
 -----
 ![User Lookup](./media/readmeimages/Lookup.png)
+
+![User Lookup](./media/readmeimages/Lookup1.png)
 
 This page contains a field where a user can input the name of another user. Once the submit button is clicked the user is able to see where and how many donations are made to. Below that there are statistics of all the user donations and a Pie graph showing the amount of money funded to different organizations.
 
