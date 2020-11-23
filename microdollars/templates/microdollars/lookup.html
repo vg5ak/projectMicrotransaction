@@ -101,14 +101,22 @@
           </div>
       </div>
       <br>
-      {% if donationTable %}
+
+      {% if donationsEmpty  %}
       <div class ="row">
         <div class="col-md-12 bg-light padding rounded">
-           {% render_table donationTable %}
+          This user has made no donations yet!
         </div>
       </div>
-      <br>
+      {% elif donationTable %}
+      <div class ="row">
+        <div class="col-md-12 bg-light padding rounded">
+          {% render_table donationTable %}
+        </div>
+      </div>
       {% endif %}
+
+      <br>
       {% if data and labels %}
       <div class ="row">
         <div class="col-md-12 bg-light padding rounded d-flex justify-content-center">

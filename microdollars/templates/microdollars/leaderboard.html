@@ -130,7 +130,7 @@
               <thead>
                   <tr>
                       <th>Ranking</th>  
-                      <th>Person</th>
+                      <th>Username</th>
                       <th>Amount Donated</th>
                       <th>Level</th>
                   </tr>
@@ -139,7 +139,7 @@
                 {% for person in leaderboard %}
                 <tr>
                   <td class="align-middle">{{person.0}}</td>
-                  <td class="align-middle">{{person.1}}</td>
+                  <td class="align-middle"><a href="/lookup?user_search={{person.1}}">{{person.1}}</a></td>
                   <td class="align-middle">{{'$'}}{{person.2}}</td>
                   <td class="align-middle">&#{{person.3}} </td>
                 </tr>

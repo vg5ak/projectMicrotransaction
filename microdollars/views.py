@@ -13,38 +13,7 @@ from django.urls import reverse
 from django.contrib import messages
 # Create your views here.
 
-"""
-def exponential(user, donation):
-        if(donation == 0):
-            return (user, donation, 128578)
-        elif(donation < 10):
-            return (user, donation, 128513)
-        elif(donation < 100):
-            return (user, donation, 129297)
-        elif(donation < 1000):
-            return (user, donation, 129321)
-        else:
-            return (user, donation, 128081)
 
-    def getAllDonations():
-        userList = User.objects.all()
-        sum = 0
-        leaderboard = []
-        for user in userList:
-            getUserDonations = usernameToUserDonations(user.username)
-            for donation in getUserDonations:
-                sum += donation.amount
-            leaderboard.append(exponential(user.username.capitalize(), sum))
-            sum = 0
-        return leaderboard
-
-    def usernameToUserDonations(username):
-        try:
-            uid = User.objects.get(username=username)
-        except ObjectDoesNotExist:
-            return None
-        return Donation.objects.filter(user=uid)
-"""
 def index(request):
     form = DonationForm(request.POST or None)
     if form.is_valid():
@@ -129,6 +98,7 @@ def lookup(request):
     donationTable = None
     data = None
     labels = None
+    donationsEmpty = False
 
     def calcDonationsPerOrg(username):
         userDonations = usernameToUserDonations(username)
@@ -141,8 +111,12 @@ def lookup(request):
 
     if form.is_valid():
         username = form.cleaned_data['user_search']
+        # get all user donations and convert to table
         donationTable = DonationTable(usernameToUserDonations(username))
+        donationsEmpty = (usernameToUserDonations(username).count() == 0)
         RequestConfig(request).configure(donationTable)
+
+        # calc total donations
         orgToTotalDonations = calcDonationsPerOrg(username)
         data = [float(val)
                 for val in list(orgToTotalDonations.values())]
@@ -150,6 +124,7 @@ def lookup(request):
 
     context = {
         'form': form,
+        'donationsEmpty':  donationsEmpty,
         'donationTable': donationTable,
         'data': data,
         'labels': labels,
@@ -187,7 +162,7 @@ def gamify(request):
             getUserDonations = usernameToUserDonations(user.username)
             for donation in getUserDonations:
                 sum += donation.amount
-            leaderboard.append(exponential(user.username.capitalize(), sum))
+            leaderboard.append(exponential(user.username, sum))
             sum = 0
         return leaderboard
 
