@@ -67,7 +67,7 @@ User Lookup
 -----
 ![User Lookup](./media/readmeimages/Lookup.png)
 
-This page contains a field where a user can input the name of another user. Once the submit button is clicked the user is able to see where and how many donations are made to. Below that there is a Pie graph showing the amount of money funded to different organizations.
+This page contains a field where a user can input the name of another user. Once the submit button is clicked the user is able to see where and how many donations are made to. Below that there are statistics of all the user donations and a Pie graph showing the amount of money funded to different organizations.
 
 
 Leaderboard
