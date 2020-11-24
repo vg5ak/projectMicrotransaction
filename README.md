@@ -81,20 +81,20 @@ User Lookup
 
 ![User Lookup](./media/readmeimages/Lookup1.png)
 
-This page contains a field where a user can input the name of another user. Once the submit button is clicked the user is able to see where and how many donations are made to. Below that there are statistics of all the user donations and a Pie graph showing the amount of money funded to different organizations.
+This page contains a field where a user can input the name of another user. Once the submit button is clicked the user is able to see where and how many donations are made to. Below that there are statistics of all the user donations and a Pie graph showing the amount of money funded to different organizations. 
 
 
 Leaderboard
 -----
 ![Home Page](./media/readmeimages/Leaderboard.png)
 
-This page represents the gamification section of the website and allows users to see which user has donated the most amount of money. The table states the user’s name, amount donated and an emoji that represents how high up on the leader board they are.
+This page represents the gamification section of the website and allows users to see which user has donated the most amount of money. The table states the user’s name, amount donated and an emoji that represents how high up on the leader board they are.You can also click on the usernames on the leaderboard to perform a User Lookup.
 
 My Profile
 ----------
 ![Home Page](./media/readmeimages/Profile.png)
 
-This section allows users to edit their profile information. The fields that can be edited include the username, first name, and last name.
+This section allows logged in users to edit their profile information. The fields that can be edited include the username, first name, and last name.
 
 
 Admin Space
